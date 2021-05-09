@@ -81,7 +81,7 @@
 #ifdef ELUNA
 #include "LuaEngine.h"
 #endif
-
+#include "Config.h"
 // Zone Interval should be 1 second
 #define ZONE_UPDATE_INTERVAL (1*IN_MILLISECONDS)
 
@@ -2990,7 +2990,9 @@ Creature* Player::GetNPCIfCanInteractWith(ObjectGuid guid, uint32 npcflagmask)
     // not too far
     if (!creature->IsWithinDistInMap(this, INTERACTION_DISTANCE))
         return nullptr;
-
+    if (creature->GetCreatureTemplate()->Entry == sConfigMgr->GetIntDefault("newnpc.id", 200002)) {//PZX 自定义NPC强制可以交互
+        return creature;
+    }
     // pussywizard: many npcs have missing conditions for class training and rogue trainer can for eg. train dual wield to a shaman :/ too many to change in sql and watch in the future
     // pussywizard: this function is not used when talking, but when already taking action (buy spell, reset talents, show spell list)
     if (npcflagmask & (UNIT_NPC_FLAG_TRAINER | UNIT_NPC_FLAG_TRAINER_CLASS) && creature->GetCreatureTemplate()->trainer_type == TRAINER_TYPE_CLASS && getClass() != creature->GetCreatureTemplate()->trainer_class)
@@ -18717,6 +18719,35 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, SQLQueryHolder* holder)
         if (!HasAuraState((AuraStateType)m_spellInfo->CasterAuraState))
             aura->HandleAllEffects(itr->second, AURA_EFFECT_HANDLE_REAL, false);
     }
+
+    //pzx 最后加载幻化
+    //幻化自定义内容
+    //读取数据库记录
+    QueryResult result_huanh = CharacterDatabase.PQuery("select huanhua from _character_hh where guid='%u'", GetGUID().GetCounter());
+    if (!result_huanh)
+    {
+        sLog->outString(">> Loaded 0 huanhua for %u", GetGUID().GetCounter());
+        return true;
+    }
+
+    do
+    {
+        Field* fields = result_huanh->Fetch();
+        std::string huanhua = fields[0].GetString();
+
+        Tokenizer tokens(huanhua, ' ');
+        int i = 0;
+        for (Tokenizer::const_iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
+        {
+            uint32 node = uint32(atol(*iter));
+            if (node > 0) {
+                SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET, node);
+            }
+            i++;
+        }
+
+    } while (result_huanh->NextRow());
+
     return true;
 }
 
@@ -27245,6 +27276,22 @@ void Player::_SaveCharacter(bool create, SQLTransaction& trans)
     }
 
     trans->Append(stmt);
+
+    //PZX 幻化的保存部分
+    index = 0;
+    PreparedStatement* stmt2 = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHARACTER_HUANHUA);
+    // cache equipment...
+    std::ostringstream ss_copy;
+    ss_copy.str("");
+
+    for (uint32 i = 0; i < EQUIPMENT_SLOT_END; ++i)
+    {
+        ss_copy << GetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET) << " ";
+    }
+
+    stmt2->setUInt32(index++, GetGUID().GetCounter());
+    stmt2->setString(index++, ss_copy.str());
+    trans->Append(stmt2);
 }
 
 void Player::_LoadGlyphs(PreparedQueryResult result)

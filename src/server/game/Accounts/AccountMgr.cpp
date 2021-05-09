@@ -17,7 +17,7 @@
 namespace AccountMgr
 {
 
-    AccountOpResult CreateAccount(std::string username, std::string password)
+    AccountOpResult CreateAccount(std::string username, std::string password, std::string email)
     {
         if (utf8length(username) > MAX_ACCOUNT_STR)
             return AOR_NAME_TOO_LONG;                           // username's too long
@@ -27,6 +27,7 @@ namespace AccountMgr
 
         Utf8ToUpperOnlyLatin(username);
         Utf8ToUpperOnlyLatin(password);
+        Utf8ToUpperOnlyLatin(email);
 
         if (GetId(username))
             return AOR_NAME_ALREADY_EXIST;                      // username does already exist
@@ -38,6 +39,7 @@ namespace AccountMgr
         stmt->setBinary(1, salt);
         stmt->setBinary(2, verifier);
         stmt->setInt8(3, uint8(sWorld->getIntConfig(CONFIG_EXPANSION)));
+        stmt->setString(4, email);
 
         LoginDatabase.Execute(stmt);
 

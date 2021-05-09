@@ -69,8 +69,16 @@ void DatabaseWorkerPool<T>::Close()
     //! Shuts down delaythreads for this connection pool by underlying deactivate().
     //! The next dequeue attempt in the worker thread tasks will result in an error,
     //! ultimately ending the worker thread task.
-    _queue->queue()->close();
-
+    
+    try
+    {
+        ACE_INLINE ACE_Message_Queue<ACE_SYNCH>* qq = _queue->queue();
+            qq->close();
+    }
+    catch (const std::exception&)
+    {
+        LOG_INFO("sql.driver", "【exception】 Closing down DatabasePool '%s'.", GetDatabaseName());
+    }
     for (uint8 i = 0; i < _connectionCount[IDX_ASYNC]; ++i)
     {
         T* t = _connections[IDX_ASYNC][i];

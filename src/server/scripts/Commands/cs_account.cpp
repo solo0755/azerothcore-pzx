@@ -94,10 +94,11 @@ public:
         ///- %Parse the command line arguments
         char* accountName = strtok((char*)args, " ");
         char* password = strtok(nullptr, " ");
+        char* email = strtok(nullptr, " ");
         if (!accountName || !password)
             return false;
 
-        AccountOpResult result = AccountMgr::CreateAccount(std::string(accountName), std::string(password));
+        AccountOpResult result = AccountMgr::CreateAccount(std::string(accountName), std::string(password), std::string(email));
         switch (result)
         {
             case AOR_OK:

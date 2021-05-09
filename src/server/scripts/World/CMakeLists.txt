@@ -24,6 +24,11 @@ set(scripts_STAT_SRCS
   ${AC_SCRIPTS_DIR}/World/npcs_special.cpp
   ${AC_SCRIPTS_DIR}/World/character_creation.cpp
   ${AC_SCRIPTS_DIR}/World/action_ip_logger.cpp
+  ${AC_SCRIPTS_DIR}/World/common_example.h
+  ${AC_SCRIPTS_DIR}/World/example_item.cpp
+  ${AC_SCRIPTS_DIR}/World/PzxMgr.h
+  ${AC_SCRIPTS_DIR}/World/PzxMgr.cpp
+  
 )
 
 AC_ADD_SCRIPT_LOADER("World" "ScriptLoader.h")

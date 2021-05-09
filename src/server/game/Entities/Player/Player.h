@@ -2750,6 +2750,18 @@ protected:
     int32 getMaxTimer(MirrorTimerType timer);
 
     /*********************************************************/
+    /***                   PZX SYSTEM                    ***/
+    /*********************************************************/
+    uint32 m_trainerid;
+    void SetTrainerEntry(const uint32 id) { m_trainerid = id; }
+    uint32 GetTrainerEntry()const { return m_trainerid; }
+    //int doVipItemUP();
+    //void setVipItemUPInfo(ItemUpData data) { m_itemUpData = data; }//VIP升级物品缓存
+    /*********************************************************/
+    /***                   PZX SYSTEM    END              ***/
+    /*********************************************************/
+
+    /*********************************************************/
     /***                  HONOR SYSTEM                     ***/
     /*********************************************************/
     time_t m_lastHonorUpdateTime;

@@ -16,6 +16,7 @@
 #include "UpdateData.h"
 #include "WorldPacket.h"
 #include "WorldSession.h"
+#include "Config.h"
 
 void WorldSession::HandleSplitItemOpcode(WorldPacket& recvData)
 {
@@ -1349,6 +1350,40 @@ void WorldSession::HandleWrapItemOpcode(WorldPacket& recvData)
         return;
     }
 
+    if (gift->GetEntry() == sConfigMgr->GetIntDefault("huanhua.id", 21831)) {//幻化物品区间  硬编码
+        uint32 _itemID = item->GetEntry();
+        uint8 eSolt = _player->FindEquipSlot(item->GetTemplate(), NULL_SLOT, true);
+        if (eSolt == EQUIPMENT_SLOT_MAINHAND || eSolt == EQUIPMENT_SLOT_OFFHAND) {
+
+            if (_player->IsTwoHandUsed()) {
+                _player->SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + EQUIPMENT_SLOT_MAINHAND * MAX_VISIBLE_ITEM_OFFSET, _itemID);// 附魔双手
+            }
+            else {
+                if (_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND) && !_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND))
+                    _player->SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + EQUIPMENT_SLOT_MAINHAND * MAX_VISIBLE_ITEM_OFFSET, _itemID);
+                if (_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND) && !_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND))
+                    _player->SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + EQUIPMENT_SLOT_OFFHAND * MAX_VISIBLE_ITEM_OFFSET, _itemID);// 随机释放
+                if (_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND) && _player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND)) {
+                    _player->SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + eSolt * MAX_VISIBLE_ITEM_OFFSET, _itemID);// 随机释放
+                }
+                if (!_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND) && !_player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND)) {
+                    return;//两只手都没武器，直接返回
+                }
+            }
+        }
+        else {
+            //uint32 equpSlot = item->GetProto()->InventoryType;
+            if (eSolt != NULL_SLOT) {
+                _player->SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + eSolt * MAX_VISIBLE_ITEM_OFFSET, _itemID);// 随机释放
+
+            }
+
+        }
+        _player->SaveToDB(false, false);
+        //PSendSysMessage(player, u8"您的武器幻化完成");
+        return;
+    }
+
     // maybe not correct check  (it is better than nothing)
     if (item->GetTemplate()->MaxCount > 0)
     {
@@ -1381,12 +1416,12 @@ void WorldSession::HandleWrapItemOpcode(WorldPacket& recvData)
         case 17304:
             item->SetEntry(17305);
             break;
-        case 17307:
+   /*     case 17307:  //PZX huanhua item
             item->SetEntry(17308);
             break;
         case 21830:
             item->SetEntry(21831);
-            break;
+            break;*/
     }
     item->SetGuidValue(ITEM_FIELD_GIFTCREATOR, _player->GetGUID());
     item->SetUInt32Value(ITEM_FIELD_FLAGS, ITEM_FIELD_FLAG_WRAPPED);

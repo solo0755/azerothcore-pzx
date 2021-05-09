@@ -65,6 +65,7 @@ void AddSC_wp_commandscript();
 void AddSC_player_commandscript();
 
 #ifdef SCRIPTS
+void AddSC_item_example();
 //world
 void AddSC_areatrigger_scripts();
 void AddSC_emerald_dragons();
@@ -1195,5 +1196,6 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     //~ AddSC_MySuperScript();
+    AddSC_item_example();
 #endif
 }
