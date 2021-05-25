@@ -1320,36 +1320,6 @@ void WorldSession::HandleWrapItemOpcode(WorldPacket& recvData)
         return;
     }
 
-    if (item->IsEquipped())
-    {
-        _player->SendEquipError(EQUIP_ERR_EQUIPPED_CANT_BE_WRAPPED, item, nullptr);
-        return;
-    }
-
-    if (item->GetGuidValue(ITEM_FIELD_GIFTCREATOR))        // HasFlag(ITEM_FIELD_FLAGS, ITEM_FLAGS_WRAPPED);
-    {
-        _player->SendEquipError(EQUIP_ERR_WRAPPED_CANT_BE_WRAPPED, item, nullptr);
-        return;
-    }
-
-    if (item->IsBag())
-    {
-        _player->SendEquipError(EQUIP_ERR_BAGS_CANT_BE_WRAPPED, item, nullptr);
-        return;
-    }
-
-    if (item->IsSoulBound())
-    {
-        _player->SendEquipError(EQUIP_ERR_BOUND_CANT_BE_WRAPPED, item, nullptr);
-        return;
-    }
-
-    if (item->GetMaxStackCount() != 1)
-    {
-        _player->SendEquipError(EQUIP_ERR_STACKABLE_CANT_BE_WRAPPED, item, nullptr);
-        return;
-    }
-
     if (gift->GetEntry() == sConfigMgr->GetIntDefault("huanhua.id", 21831)) {//幻化物品区间  硬编码
         uint32 _itemID = item->GetEntry();
         uint8 eSolt = _player->FindEquipSlot(item->GetTemplate(), NULL_SLOT, true);
@@ -1383,6 +1353,38 @@ void WorldSession::HandleWrapItemOpcode(WorldPacket& recvData)
         //PSendSysMessage(player, u8"您的武器幻化完成");
         return;
     }
+
+    if (item->IsEquipped())
+    {
+        _player->SendEquipError(EQUIP_ERR_EQUIPPED_CANT_BE_WRAPPED, item, nullptr);
+        return;
+    }
+
+    if (item->GetGuidValue(ITEM_FIELD_GIFTCREATOR))        // HasFlag(ITEM_FIELD_FLAGS, ITEM_FLAGS_WRAPPED);
+    {
+        _player->SendEquipError(EQUIP_ERR_WRAPPED_CANT_BE_WRAPPED, item, nullptr);
+        return;
+    }
+
+    if (item->IsBag())
+    {
+        _player->SendEquipError(EQUIP_ERR_BAGS_CANT_BE_WRAPPED, item, nullptr);
+        return;
+    }
+
+    if (item->IsSoulBound())
+    {
+        _player->SendEquipError(EQUIP_ERR_BOUND_CANT_BE_WRAPPED, item, nullptr);
+        return;
+    }
+
+    if (item->GetMaxStackCount() != 1)
+    {
+        _player->SendEquipError(EQUIP_ERR_STACKABLE_CANT_BE_WRAPPED, item, nullptr);
+        return;
+    }
+
+
 
     // maybe not correct check  (it is better than nothing)
     if (item->GetTemplate()->MaxCount > 0)
