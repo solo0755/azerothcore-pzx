@@ -13,128 +13,128 @@
 
 enum HodirSpellData
 {
-    SPELL_BERSERK                       = 26662,
+    SPELL_BERSERK = 26662,
 
-    SPELL_BITING_COLD_BOSS_AURA         = 62038,
-    SPELL_BITING_COLD_PLAYER_AURA       = 62039,
-    SPELL_BITING_COLD_DAMAGE            = 62188,
+    SPELL_BITING_COLD_BOSS_AURA = 62038,
+    SPELL_BITING_COLD_PLAYER_AURA = 62039,
+    SPELL_BITING_COLD_DAMAGE = 62188,
 
-    SPELL_FREEZE                        = 62469,
+    SPELL_FREEZE = 62469,
 
-    SPELL_FLASH_FREEZE_CAST             = 61968,
-    SPELL_FLASH_FREEZE_INSTAKILL        = 62226,
-    SPELL_FLASH_FREEZE_TRAPPED_PLAYER   = 61969,
-    SPELL_FLASH_FREEZE_TRAPPED_NPC      = 61990,
-    SPELL_FLASH_FREEZE_VISUAL           = 62148,
-    SPELL_SAFE_AREA                     = 65705,
-    SPELL_SAFE_AREA_TRIGGERED           = 62464,
-    SPELL_SHATTER_CHEST                 = 62501,
+    SPELL_FLASH_FREEZE_CAST = 61968,
+    SPELL_FLASH_FREEZE_INSTAKILL = 62226,
+    SPELL_FLASH_FREEZE_TRAPPED_PLAYER = 61969,
+    SPELL_FLASH_FREEZE_TRAPPED_NPC = 61990,
+    SPELL_FLASH_FREEZE_VISUAL = 62148,
+    SPELL_SAFE_AREA = 65705,
+    SPELL_SAFE_AREA_TRIGGERED = 62464,
+    SPELL_SHATTER_CHEST = 62501,
 
-    SPELL_ICICLE_BOSS_AURA              = 62227,
-    SPELL_ICICLE_TBBA                   = 63545,
+    SPELL_ICICLE_BOSS_AURA = 62227,
+    SPELL_ICICLE_TBBA = 63545,
 
-    SPELL_ICICLE_VISUAL_UNPACKED        = 62234,
-    SPELL_ICICLE_VISUAL_PACKED          = 62462,
-    SPELL_ICICLE_VISUAL_FALLING         = 62453,
-    SPELL_ICICLE_FALL_EFFECT_UNPACKED   = 62236,
-    SPELL_ICICLE_FALL_EFFECT_PACKED     = 62460,
-    SPELL_ICE_SHARDS_SMALL              = 62457,
-    SPELL_ICE_SHARDS_BIG                = 65370,
-    SPELL_SNOWDRIFT                     = 62463,
+    SPELL_ICICLE_VISUAL_UNPACKED = 62234,
+    SPELL_ICICLE_VISUAL_PACKED = 62462,
+    SPELL_ICICLE_VISUAL_FALLING = 62453,
+    SPELL_ICICLE_FALL_EFFECT_UNPACKED = 62236,
+    SPELL_ICICLE_FALL_EFFECT_PACKED = 62460,
+    SPELL_ICE_SHARDS_SMALL = 62457,
+    SPELL_ICE_SHARDS_BIG = 65370,
+    SPELL_SNOWDRIFT = 62463,
 
-    SPELL_FROZEN_BLOWS_10               = 62478,
-    SPELL_FROZEN_BLOWS_25               = 63512,
+    SPELL_FROZEN_BLOWS_10 = 62478,
+    SPELL_FROZEN_BLOWS_25 = 63512,
 
     // Helpers:
-    SPELL_PRIEST_DISPELL_MAGIC          = 63499,
-    SPELL_PRIEST_GREAT_HEAL             = 62809,
-    SPELL_PRIEST_SMITE                  = 61923,
+    SPELL_PRIEST_DISPELL_MAGIC = 63499,
+    SPELL_PRIEST_GREAT_HEAL = 62809,
+    SPELL_PRIEST_SMITE = 61923,
 
-    SPELL_DRUID_WRATH                   = 62793,
-    SPELL_DRUID_STARLIGHT_AREA_AURA     = 62807,
+    SPELL_DRUID_WRATH = 62793,
+    SPELL_DRUID_STARLIGHT_AREA_AURA = 62807,
 
-    SPELL_SHAMAN_LAVA_BURST             = 61924,
-    SPELL_SHAMAN_STORM_CLOUD_10         = 65123,
-    SPELL_SHAMAN_STORM_CLOUD_25         = 65133,
-    SPELL_SHAMAN_STORM_POWER_10         = 63711,
-    SPELL_SHAMAN_STORM_POWER_25         = 65134,
+    SPELL_SHAMAN_LAVA_BURST = 61924,
+    SPELL_SHAMAN_STORM_CLOUD_10 = 65123,
+    SPELL_SHAMAN_STORM_CLOUD_25 = 65133,
+    SPELL_SHAMAN_STORM_POWER_10 = 63711,
+    SPELL_SHAMAN_STORM_POWER_25 = 65134,
 
-    SPELL_MAGE_FIREBALL                 = 61909,
-    SPELL_MAGE_MELT_ICE                 = 64528,
-    SPELL_MAGE_CONJURE_TOASTY_FIRE      = 62823,
-    SPELL_MAGE_SUMMON_TOASTY_FIRE       = 62819,
-    SPELL_MAGE_TOASTY_FIRE_AURA         = 62821,
-    SPELL_SINGED                        = 65280,
+    SPELL_MAGE_FIREBALL = 61909,
+    SPELL_MAGE_MELT_ICE = 64528,
+    SPELL_MAGE_CONJURE_TOASTY_FIRE = 62823,
+    SPELL_MAGE_SUMMON_TOASTY_FIRE = 62819,
+    SPELL_MAGE_TOASTY_FIRE_AURA = 62821,
+    SPELL_SINGED = 65280,
 };
 
 enum HodirNPCs
 {
     //NPC_HODIR                         = 32845,
 
-    NPC_PAN_FIELD_MEDIC_PENNY           = 32897,
-    NPC_DAN_ELLIE_NIGHTFEATHER          = 32901,
-    NPC_SAN_ELEMENTALIST_AVUUN          = 32900,
-    NPC_MAN_MISSY_FLAMECUFFS            = 32893,
+    NPC_PAN_FIELD_MEDIC_PENNY = 32897,
+    NPC_DAN_ELLIE_NIGHTFEATHER = 32901,
+    NPC_SAN_ELEMENTALIST_AVUUN = 32900,
+    NPC_MAN_MISSY_FLAMECUFFS = 32893,
 
-    NPC_PAH_FIELD_MEDIC_JESSI           = 33326,
-    NPC_DAH_EIVI_NIGHTFEATHER           = 33325,
-    NPC_SAH_ELEMENTALIST_MAHFUUN        = 33328,
-    NPC_MAH_SISSY_FLAMECUFFS            = 33327,
+    NPC_PAH_FIELD_MEDIC_JESSI = 33326,
+    NPC_DAH_EIVI_NIGHTFEATHER = 33325,
+    NPC_SAH_ELEMENTALIST_MAHFUUN = 33328,
+    NPC_MAH_SISSY_FLAMECUFFS = 33327,
 
-    NPC_PHN_BATTLEPRIEST_ELIZA          = 32948,
-    NPC_DHN_TOR_GREYCLOUD               = 32941,
-    NPC_SHN_SPIRITWALKER_YONA           = 32950,
-    NPC_MHN_VEESHA_BLAZEWEAVER          = 32946,
+    NPC_PHN_BATTLEPRIEST_ELIZA = 32948,
+    NPC_DHN_TOR_GREYCLOUD = 32941,
+    NPC_SHN_SPIRITWALKER_YONA = 32950,
+    NPC_MHN_VEESHA_BLAZEWEAVER = 32946,
 
-    NPC_PHH_BATTLEPRIEST_GINA           = 33330,
-    NPC_DHH_KAR_GREYCLOUD               = 33333,
-    NPC_SHH_SPIRITWALKER_TARA           = 33332,
-    NPC_MHH_AMIRA_BLAZEWEAVER           = 33331,
+    NPC_PHH_BATTLEPRIEST_GINA = 33330,
+    NPC_DHH_KAR_GREYCLOUD = 33333,
+    NPC_SHH_SPIRITWALKER_TARA = 33332,
+    NPC_MHH_AMIRA_BLAZEWEAVER = 33331,
 
-    NPC_FLASH_FREEZE_PLR                = 32926,
-    NPC_FLASH_FREEZE_NPC                = 32938,
-    NPC_ICICLE_UNPACKED                 = 33169,
-    NPC_ICICLE_PACKED                   = 33173,
-    NPC_TOASTY_FIRE                     = 33342,
-    NPC_RARE_WINTER_CACHE_TRIGGER       = 88101,
+    NPC_FLASH_FREEZE_PLR = 32926,
+    NPC_FLASH_FREEZE_NPC = 32938,
+    NPC_ICICLE_UNPACKED = 33169,
+    NPC_ICICLE_PACKED = 33173,
+    NPC_TOASTY_FIRE = 33342,
+    NPC_RARE_WINTER_CACHE_TRIGGER = 88101,
 };
 
 enum HodirEvents
 {
     // Hodir:
-    EVENT_FLASH_FREEZE                  = 1,
-    EVENT_FROZEN_BLOWS                  = 2,
-    EVENT_BERSERK                       = 3,
-    EVENT_FREEZE                        = 4,
-    EVENT_SMALL_ICICLES_ENABLE          = 5,
-    EVENT_HARD_MODE_MISSED              = 6,
-    EVENT_DESPAWN_CHEST                 = 7,
-    EVENT_FAIL_HM                       = 8,
+    EVENT_FLASH_FREEZE = 1,
+    EVENT_FROZEN_BLOWS = 2,
+    EVENT_BERSERK = 3,
+    EVENT_FREEZE = 4,
+    EVENT_SMALL_ICICLES_ENABLE = 5,
+    EVENT_HARD_MODE_MISSED = 6,
+    EVENT_DESPAWN_CHEST = 7,
+    EVENT_FAIL_HM = 8,
 
-    EVENT_TRY_FREE_HELPER               = 10,
-    EVENT_PRIEST_DISPELL_MAGIC          = 11,
-    EVENT_PRIEST_GREAT_HEAL             = 12,
-    EVENT_PRIEST_SMITE                  = 13,
-    EVENT_DRUID_WRATH                   = 14,
-    EVENT_DRUID_STARLIGHT               = 15,
-    EVENT_SHAMAN_LAVA_BURST             = 16,
-    EVENT_SHAMAN_STORM_CLOUD            = 17,
-    EVENT_MAGE_TOASTY_FIRE              = 18,
-    EVENT_MAGE_FIREBALL                 = 19,
-    EVENT_MAGE_MELT_ICE                 = 20,
+    EVENT_TRY_FREE_HELPER = 10,
+    EVENT_PRIEST_DISPELL_MAGIC = 11,
+    EVENT_PRIEST_GREAT_HEAL = 12,
+    EVENT_PRIEST_SMITE = 13,
+    EVENT_DRUID_WRATH = 14,
+    EVENT_DRUID_STARLIGHT = 15,
+    EVENT_SHAMAN_LAVA_BURST = 16,
+    EVENT_SHAMAN_STORM_CLOUD = 17,
+    EVENT_MAGE_TOASTY_FIRE = 18,
+    EVENT_MAGE_FIREBALL = 19,
+    EVENT_MAGE_MELT_ICE = 20,
 };
 
 enum HodirText
 {
-    TEXT_AGGRO          = 0,
-    TEXT_SLAY           = 1,
-    TEXT_FLASH_FREEZE   = 2,
-    TEXT_STALACTITE     = 3,
-    TEXT_DEATH          = 4,
-    TEXT_BERSERK        = 5,
-    TEXT_HM_MISS        = 6,
-    TEXT_EMOTE_FREEZE   = 7,
-    TEXT_EMOTE_BLOW     = 8,
+    TEXT_AGGRO = 0,
+    TEXT_SLAY = 1,
+    TEXT_FLASH_FREEZE = 2,
+    TEXT_STALACTITE = 3,
+    TEXT_DEATH = 4,
+    TEXT_BERSERK = 5,
+    TEXT_HM_MISS = 6,
+    TEXT_EMOTE_FREEZE = 7,
+    TEXT_EMOTE_BLOW = 8,
 };
 
 #define SPELL_FROZEN_BLOWS              RAID_MODE(SPELL_FROZEN_BLOWS_10, SPELL_FROZEN_BLOWS_25)
@@ -142,13 +142,13 @@ enum HodirText
 
 enum HodirSounds
 {
-    SOUND_HODIR_AGGRO                   = 15552,
-    SOUND_HODIR_SLAIN_1                 = 15553,
-    SOUND_HODIR_SLAIN_2                 = 15554,
-    SOUND_HODIR_FLASH_FREEZE            = 15555,
-    SOUND_HODIR_FROZEN_BLOWS            = 15556,
-    SOUND_HODIR_DEFEATED                = 15557,
-    SOUND_HODIR_BERSERK                 = 15558,
+    SOUND_HODIR_AGGRO = 15552,
+    SOUND_HODIR_SLAIN_1 = 15553,
+    SOUND_HODIR_SLAIN_2 = 15554,
+    SOUND_HODIR_FLASH_FREEZE = 15555,
+    SOUND_HODIR_FROZEN_BLOWS = 15556,
+    SOUND_HODIR_DEFEATED = 15557,
+    SOUND_HODIR_BERSERK = 15558,
 };
 
 struct HodirHelperData
@@ -239,7 +239,7 @@ public:
                 pInstance->SetData(TYPE_HODIR, NOT_STARTED);
             }
 
-            if (GameObject* go = me->FindNearestGameObject(GO_HODIR_FRONTDOOR, 300.0f))
+            if (GameObject* go = me->FindNearestGameObject(GO_HODIR_FRONTDOOR, 900.0f))
             {
                 go->SetGoState(GO_STATE_ACTIVE);
             }
@@ -260,7 +260,7 @@ public:
             SmallIcicles(true);
             events.Reset();
             events.ScheduleEvent(EVENT_FLASH_FREEZE, urand(48000, 49000));
-            events.ScheduleEvent(EVENT_FREEZE, urand(17000,20000));
+            events.ScheduleEvent(EVENT_FREEZE, urand(17000, 20000));
             events.ScheduleEvent(EVENT_BERSERK, 480000);
             events.ScheduleEvent(EVENT_HARD_MODE_MISSED, 180000);
             Talk(TEXT_AGGRO);
@@ -282,20 +282,20 @@ public:
             {
                 switch (action)
                 {
-                    case EVENT_FAIL_HM:
-                        if (GameObject* go = me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 500.0f))
-                        {
-                            go->SetGoState(GO_STATE_ACTIVE);
-                            events.ScheduleEvent(EVENT_DESPAWN_CHEST, 3000);
-                        }
-                        break;
+                case EVENT_FAIL_HM:
+                    if (GameObject* go = me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 500.0f))
+                    {
+                        go->SetGoState(GO_STATE_ACTIVE);
+                        events.ScheduleEvent(EVENT_DESPAWN_CHEST, 3000);
+                    }
+                    break;
                 }
             }
         }
 
         void SmallIcicles(bool enable)
         {
-            if( enable )
+            if (enable)
                 me->CastSpell(me, SPELL_ICICLE_BOSS_AURA, true);
             else
                 me->RemoveAura(SPELL_ICICLE_BOSS_AURA);
@@ -303,19 +303,19 @@ public:
 
         void SpellHitTarget(Unit* target, const SpellInfo* spell) override
         {
-            switch( spell->Id )
+            switch (spell->Id)
             {
-                case SPELL_ICICLE_TBBA:
-                    me->CastSpell(target, SPELL_ICICLE_VISUAL_UNPACKED, true);
-                    break;
-                case SPELL_FLASH_FREEZE_VISUAL:
-                    {
-                        std::list<Creature*> fires;
-                        me->GetCreaturesWithEntryInRange(fires, 200.0f, NPC_TOASTY_FIRE);
-                        for (std::list<Creature*>::iterator itr = fires.begin(); itr != fires.end(); ++itr)
-                            (*itr)->AI()->DoAction(1); // remove it
-                    }
-                    break;
+            case SPELL_ICICLE_TBBA:
+                me->CastSpell(target, SPELL_ICICLE_VISUAL_UNPACKED, true);
+                break;
+            case SPELL_FLASH_FREEZE_VISUAL:
+            {
+                std::list<Creature*> fires;
+                me->GetCreaturesWithEntryInRange(fires, 200.0f, NPC_TOASTY_FIRE);
+                for (std::list<Creature*>::iterator itr = fires.begin(); itr != fires.end(); ++itr)
+                    (*itr)->AI()->DoAction(1); // remove it
+            }
+            break;
             }
         }
 
@@ -345,9 +345,9 @@ public:
                     events.Reset();
                     summons.DespawnAll();
 
-                    if( GameObject* d = me->FindNearestGameObject(GO_HODIR_FROZEN_DOOR, 250.0f))
+                    if (GameObject* d = me->FindNearestGameObject(GO_HODIR_FROZEN_DOOR, 250.0f))
                     {
-                        if( d->GetGoState() != GO_STATE_ACTIVE )
+                        if (d->GetGoState() != GO_STATE_ACTIVE)
                         {
                             d->SetLootState(GO_READY);
                             d->UseDoorOrButton(0, false);
@@ -355,7 +355,7 @@ public:
                     }
                     if (GameObject* d = me->FindNearestGameObject(GO_HODIR_DOOR, 250.0f))
                     {
-                        if( d->GetGoState() != GO_STATE_ACTIVE )
+                        if (d->GetGoState() != GO_STATE_ACTIVE)
                         {
                             d->SetLootState(GO_READY);
                             d->UseDoorOrButton(0, false);
@@ -375,8 +375,10 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            if (!IsInRoom(&ENTRANCE_DOOR, Axis::AXIS_Y, false) || !IsInRoom(&EXIT_DOOR, Axis::AXIS_Y, true))
+            //if (!IsInRoom(&ENTRANCE_DOOR, Axis::AXIS_Y, false) || !IsInRoom(&EXIT_DOOR, Axis::AXIS_Y, true))
+            if (me->GetPositionY() <= ENTRANCE_DOOR.GetPositionY() || me->GetPositionY() >= EXIT_DOOR.GetPositionY())
             {
+                boss_hodirAI::EnterEvadeMode();
                 return;
             }
 
@@ -394,77 +396,77 @@ public:
 
             events.Update(diff);
 
-            if( me->HasUnitState(UNIT_STATE_CASTING) )
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
             switch (events.ExecuteEvent())
             {
-                case 0:
-                    break;
-                case EVENT_BERSERK:
-                    {
-                        berserk = true;
-                        me->CastSpell(me, SPELL_BERSERK, true);
-                        Talk(TEXT_BERSERK);
-                    }
-                    break;
-                case EVENT_HARD_MODE_MISSED:
-                    {
-                        Talk(TEXT_HM_MISS);
-                        me->CastSpell(me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 400.0f), SPELL_SHATTER_CHEST, false);
-                    }
-                    break;
-                case EVENT_DESPAWN_CHEST:
-                    if (pInstance && pInstance->GetData(TYPE_HODIR) != DONE)
-                        pInstance->SetData(TYPE_HODIR_HM_FAIL, 0);
-                    break;
-                case EVENT_FLASH_FREEZE:
-                    {
-                        std::list<Unit*> targets;
-                        Map::PlayerList const& pl = me->GetMap()->GetPlayers();
-                        for (Map::PlayerList::const_iterator itr = pl.begin(); itr != pl.end(); ++itr)
-                            targets.push_back(itr->GetSource());
-                        targets.remove_if(acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
-                        targets.remove_if(acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
-                        acore::Containers::RandomResizeList(targets, (RAID_MODE(2,3)));
-                        for (std::list<Unit*>::const_iterator itr = targets.begin(); itr != targets.end(); ++itr)
-                        {
-                            float prevZ = (*itr)->GetPositionZ();
-                            (*itr)->m_positionZ = 432.7f;
-                            (*itr)->CastSpell((*itr), SPELL_ICICLE_VISUAL_PACKED, true);
-                            (*itr)->m_positionZ = prevZ;
-                        }
+            case 0:
+                break;
+            case EVENT_BERSERK:
+            {
+                berserk = true;
+                me->CastSpell(me, SPELL_BERSERK, true);
+                Talk(TEXT_BERSERK);
+            }
+            break;
+            case EVENT_HARD_MODE_MISSED:
+            {
+                Talk(TEXT_HM_MISS);
+                me->CastSpell(me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 400.0f), SPELL_SHATTER_CHEST, false);
+            }
+            break;
+            case EVENT_DESPAWN_CHEST:
+                if (pInstance && pInstance->GetData(TYPE_HODIR) != DONE)
+                    pInstance->SetData(TYPE_HODIR_HM_FAIL, 0);
+                break;
+            case EVENT_FLASH_FREEZE:
+            {
+                std::list<Unit*> targets;
+                Map::PlayerList const& pl = me->GetMap()->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = pl.begin(); itr != pl.end(); ++itr)
+                    targets.push_back(itr->GetSource());
+                targets.remove_if(acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
+                targets.remove_if(acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
+                acore::Containers::RandomResizeList(targets, (RAID_MODE(2, 3)));
+                for (std::list<Unit*>::const_iterator itr = targets.begin(); itr != targets.end(); ++itr)
+                {
+                    float prevZ = (*itr)->GetPositionZ();
+                    (*itr)->m_positionZ = 432.7f;
+                    (*itr)->CastSpell((*itr), SPELL_ICICLE_VISUAL_PACKED, true);
+                    (*itr)->m_positionZ = prevZ;
+                }
 
-                        me->CastSpell((Unit*)nullptr, SPELL_FLASH_FREEZE_CAST, false);
-                        me->PlayDirectSound(SOUND_HODIR_FLASH_FREEZE, 0);
-                        Talk(TEXT_FLASH_FREEZE);
-                        Talk(TEXT_EMOTE_FREEZE);
-                        SmallIcicles(false);
-                        events.ScheduleEvent(EVENT_FLASH_FREEZE, urand(48000, 49000));
-                        events.ScheduleEvent(EVENT_SMALL_ICICLES_ENABLE, Is25ManRaid() ? 12000 : 24000);
-                        events.ScheduleEvent(EVENT_FROZEN_BLOWS, 15000);
-                        events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
-                    }
-                    break;
-                case EVENT_SMALL_ICICLES_ENABLE:
-                    {
-                        SmallIcicles(true);
-                    }
-                    break;
-                case EVENT_FROZEN_BLOWS:
-                    {
-                        Talk(TEXT_EMOTE_BLOW);
-                        Talk(TEXT_STALACTITE);
-                        me->CastSpell(me, Is25ManRaid()? SPELL_FROZEN_BLOWS_25 : SPELL_FROZEN_BLOWS_10, true);
-                    }
-                    break;
-                case EVENT_FREEZE:
-                    if (Player* plr = SelectTargetFromPlayerList(50.0f, SPELL_FLASH_FREEZE_TRAPPED_PLAYER))
-                        me->CastSpell(plr, SPELL_FREEZE, false);
-                    else if (Unit* plr = SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f, true))
-                        me->CastSpell(plr, SPELL_FREEZE, false);
-                    events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
-                    break;
+                me->CastSpell((Unit*)nullptr, SPELL_FLASH_FREEZE_CAST, false);
+                me->PlayDirectSound(SOUND_HODIR_FLASH_FREEZE, 0);
+                Talk(TEXT_FLASH_FREEZE);
+                Talk(TEXT_EMOTE_FREEZE);
+                SmallIcicles(false);
+                events.ScheduleEvent(EVENT_FLASH_FREEZE, urand(48000, 49000));
+                events.ScheduleEvent(EVENT_SMALL_ICICLES_ENABLE, Is25ManRaid() ? 12000 : 24000);
+                events.ScheduleEvent(EVENT_FROZEN_BLOWS, 15000);
+                events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
+            }
+            break;
+            case EVENT_SMALL_ICICLES_ENABLE:
+            {
+                SmallIcicles(true);
+            }
+            break;
+            case EVENT_FROZEN_BLOWS:
+            {
+                Talk(TEXT_EMOTE_BLOW);
+                Talk(TEXT_STALACTITE);
+                me->CastSpell(me, Is25ManRaid() ? SPELL_FROZEN_BLOWS_25 : SPELL_FROZEN_BLOWS_10, true);
+            }
+            break;
+            case EVENT_FREEZE:
+                if (Player* plr = SelectTargetFromPlayerList(50.0f, SPELL_FLASH_FREEZE_TRAPPED_PLAYER))
+                    me->CastSpell(plr, SPELL_FREEZE, false);
+                else if (Unit* plr = SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f, true))
+                    me->CastSpell(plr, SPELL_FREEZE, false);
+                events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
+                break;
             }
 
             DoMeleeAttackIfReady();
@@ -478,7 +480,7 @@ public:
         void SpawnHelpers()
         {
             char faction = 'A';
-            if( hhd[0][0].id )
+            if (hhd[0][0].id)
             {
                 Map::PlayerList const& cl = me->GetMap()->GetPlayers();
                 for (Map::PlayerList::const_iterator itr = cl.begin(); itr != cl.end(); ++itr)
@@ -490,25 +492,25 @@ public:
             }
 
             uint8 cnt = 0;
-            if( faction )
-                for( uint8 k = 0; k < 4; ++k )
+            if (faction)
+                for (uint8 k = 0; k < 4; ++k)
                 {
-                    if( (faction == 'A' && ( k > 1 || (k == 1 && RAID_MODE(1, 0)) )) ||
-                            (faction == 'H' && ( k < 2 || (k == 3 && RAID_MODE(1, 0)) )) )
+                    if ((faction == 'A' && (k > 1 || (k == 1 && RAID_MODE(1, 0)))) ||
+                        (faction == 'H' && (k < 2 || (k == 3 && RAID_MODE(1, 0)))))
                         continue;
 
-                    for( uint8 i = 0; i < 4; ++i )
+                    for (uint8 i = 0; i < 4; ++i)
                     {
-                        if( !hhd[k][i].id )
+                        if (!hhd[k][i].id)
                             continue;
 
-                        if( Creature* h_p = me->SummonCreature(hhd[k][i].id, hhd[k][i].x, hhd[k][i].y, 432.69f, M_PI / 2) )
+                        if (Creature* h_p = me->SummonCreature(hhd[k][i].id, hhd[k][i].x, hhd[k][i].y, 432.69f, M_PI / 2))
                         {
                             h_p->setFaction(1665);
-                            if( cnt < 8 )
+                            if (cnt < 8)
                                 Helpers[cnt++] = h_p->GetGUID();
 
-                            if( Creature* c = h_p->SummonCreature(NPC_FLASH_FREEZE_NPC, h_p->GetPositionX(), h_p->GetPositionY(), h_p->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000) )
+                            if (Creature* c = h_p->SummonCreature(NPC_FLASH_FREEZE_NPC, h_p->GetPositionX(), h_p->GetPositionY(), h_p->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                             {
                                 c->CastSpell(h_p, SPELL_FLASH_FREEZE_TRAPPED_NPC, true);
                                 JustSummoned(c);
@@ -549,15 +551,15 @@ public:
             if (value)
                 switch (id)
                 {
-                    case 1:
-                        bAchievCheese = false;
-                        break;
-                    case 2:
-                        bAchievGettingCold = false;
-                        break;
-                    case 4:
-                        bAchievCoolestFriends = false;
-                        break;
+                case 1:
+                    bAchievCheese = false;
+                    break;
+                case 2:
+                    bAchievGettingCold = false;
+                    break;
+                case 4:
+                    bAchievCoolestFriends = false;
+                    break;
                 }
         }
 
@@ -565,12 +567,12 @@ public:
         {
             switch (id)
             {
-                case 1:
-                    return (bAchievCheese ? 1 : 0);
-                case 2:
-                    return (bAchievGettingCold ? 1 : 0);
-                case 4:
-                    return (bAchievCoolestFriends ? 1 : 0);
+            case 1:
+                return (bAchievCheese ? 1 : 0);
+            case 2:
+                return (bAchievGettingCold ? 1 : 0);
+            case 4:
+                return (bAchievCoolestFriends ? 1 : 0);
             }
             return 0;
         }
@@ -602,7 +604,7 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            if( timer1 <= diff )
+            if (timer1 <= diff)
             {
                 me->CastSpell(me, (me->GetEntry() == 33169 ? SPELL_ICICLE_FALL_EFFECT_UNPACKED : SPELL_ICICLE_FALL_EFFECT_PACKED), true);
                 me->CastSpell(me, SPELL_ICICLE_VISUAL_FALLING, false);
@@ -703,7 +705,7 @@ public:
         {
             if (a == 1)
             {
-                if( GameObject* fire = me->FindNearestGameObject(194300, 1.0f) )
+                if (GameObject* fire = me->FindNearestGameObject(194300, 1.0f))
                 {
                     fire->SetOwnerGUID(ObjectGuid::Empty);
                     fire->Delete();
@@ -714,12 +716,12 @@ public:
 
         void SpellHit(Unit*  /*caster*/, const SpellInfo* spell) override
         {
-            switch( spell->Id )
+            switch (spell->Id)
             {
-                case SPELL_ICE_SHARDS_SMALL:
-                case SPELL_ICE_SHARDS_BIG:
-                    DoAction(1);
-                    break;
+            case SPELL_ICE_SHARDS_SMALL:
+            case SPELL_ICE_SHARDS_BIG:
+                DoAction(1);
+                break;
             }
         }
     };
@@ -761,7 +763,7 @@ public:
 
         void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
-            if(spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
+            if (spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
             {
                 events.Reset();
                 events.ScheduleEvent(EVENT_TRY_FREE_HELPER, 2000);
@@ -772,40 +774,40 @@ public:
         {
             events.Update(diff);
 
-            if( me->HasUnitState(UNIT_STATE_CASTING) )
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-            switch( events.ExecuteEvent() )
+            switch (events.ExecuteEvent())
             {
-                case 0:
-                    break;
-                case EVENT_TRY_FREE_HELPER:
-                    {
-                        if( !me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC) )
-                            if( pInstance )
-                                if( ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR) )
-                                    if( Creature* hodir = ObjectAccessor::GetCreature(*me, g) )
-                                    {
-                                        AttackStart(hodir);
-                                        ScheduleAbilities();
-                                        break;
-                                    }
-                        events.RepeatEvent(2000);
-                    }
-                    break;
-                case EVENT_PRIEST_DISPELL_MAGIC:
-                    me->CastCustomSpell(SPELL_PRIEST_DISPELL_MAGIC, SPELLVALUE_MAX_TARGETS, 1, (Unit*)nullptr, false);
-                    events.RepeatEvent(7000);
-                    break;
-                case EVENT_PRIEST_GREAT_HEAL:
-                    me->CastSpell(me, SPELL_PRIEST_GREAT_HEAL, false);
-                    events.RepeatEvent(urand(6000, 7000));
-                    break;
-                case EVENT_PRIEST_SMITE:
-                    if (Unit* victim = me->GetVictim())
-                        me->CastSpell(victim, SPELL_PRIEST_SMITE, false);
-                    events.RepeatEvent(2100);
-                    break;
+            case 0:
+                break;
+            case EVENT_TRY_FREE_HELPER:
+            {
+                if (!me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC))
+                    if (pInstance)
+                        if (ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR))
+                            if (Creature* hodir = ObjectAccessor::GetCreature(*me, g))
+                            {
+                                AttackStart(hodir);
+                                ScheduleAbilities();
+                                break;
+                            }
+                events.RepeatEvent(2000);
+            }
+            break;
+            case EVENT_PRIEST_DISPELL_MAGIC:
+                me->CastCustomSpell(SPELL_PRIEST_DISPELL_MAGIC, SPELLVALUE_MAX_TARGETS, 1, (Unit*)nullptr, false);
+                events.RepeatEvent(7000);
+                break;
+            case EVENT_PRIEST_GREAT_HEAL:
+                me->CastSpell(me, SPELL_PRIEST_GREAT_HEAL, false);
+                events.RepeatEvent(urand(6000, 7000));
+                break;
+            case EVENT_PRIEST_SMITE:
+                if (Unit* victim = me->GetVictim())
+                    me->CastSpell(victim, SPELL_PRIEST_SMITE, false);
+                events.RepeatEvent(2100);
+                break;
             }
         }
 
@@ -857,7 +859,7 @@ public:
 
         void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
-            if(spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
+            if (spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
             {
                 events.Reset();
                 events.ScheduleEvent(EVENT_TRY_FREE_HELPER, 2000);
@@ -868,41 +870,41 @@ public:
         {
             events.Update(diff);
 
-            if( me->HasUnitState(UNIT_STATE_CASTING) )
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-            switch( events.ExecuteEvent() )
+            switch (events.ExecuteEvent())
             {
-                case 0:
+            case 0:
+                break;
+            case EVENT_TRY_FREE_HELPER:
+            {
+                if (!me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC))
+                    if (pInstance)
+                        if (ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR))
+                            if (Creature* hodir = ObjectAccessor::GetCreature(*me, g))
+                            {
+                                AttackStart(hodir);
+                                ScheduleAbilities();
+                                break;
+                            }
+                events.RepeatEvent(2000);
+            }
+            break;
+            case EVENT_DRUID_WRATH:
+                if (Unit* victim = me->GetVictim())
+                    me->CastSpell(victim, SPELL_DRUID_WRATH, false);
+                events.RepeatEvent(1600);
+                break;
+            case EVENT_DRUID_STARLIGHT:
+                if (me->GetPositionZ() < 433.0f) // ensure npc is on the ground
+                {
+                    me->CastSpell(me, SPELL_DRUID_STARLIGHT_AREA_AURA, false);
+                    events.RepeatEvent(15000);
                     break;
-                case EVENT_TRY_FREE_HELPER:
-                    {
-                        if( !me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC) )
-                            if( pInstance )
-                                if( ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR) )
-                                    if( Creature* hodir = ObjectAccessor::GetCreature(*me, g) )
-                                    {
-                                        AttackStart(hodir);
-                                        ScheduleAbilities();
-                                        break;
-                                    }
-                        events.RepeatEvent(2000);
-                    }
-                    break;
-                case EVENT_DRUID_WRATH:
-                    if (Unit* victim = me->GetVictim())
-                        me->CastSpell(victim, SPELL_DRUID_WRATH, false);
-                    events.RepeatEvent(1600);
-                    break;
-                case EVENT_DRUID_STARLIGHT:
-                    if (me->GetPositionZ() < 433.0f) // ensure npc is on the ground
-                    {
-                        me->CastSpell(me, SPELL_DRUID_STARLIGHT_AREA_AURA, false);
-                        events.RepeatEvent(15000);
-                        break;
-                    }
-                    events.RepeatEvent(3000);
-                    break;
+                }
+                events.RepeatEvent(3000);
+                break;
             }
         }
 
@@ -954,7 +956,7 @@ public:
 
         void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
-            if(spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
+            if (spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
             {
                 events.Reset();
                 events.ScheduleEvent(EVENT_TRY_FREE_HELPER, 2000);
@@ -972,37 +974,37 @@ public:
         {
             events.Update(diff);
 
-            if( me->HasUnitState(UNIT_STATE_CASTING) )
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-            switch( events.ExecuteEvent() )
+            switch (events.ExecuteEvent())
             {
-                case 0:
-                    break;
-                case EVENT_TRY_FREE_HELPER:
-                    {
-                        if( !me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC) )
-                            if( pInstance )
-                                if( ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR) )
-                                    if( Creature* hodir = ObjectAccessor::GetCreature(*me, g) )
-                                    {
-                                        AttackStart(hodir);
-                                        ScheduleAbilities();
-                                        break;
-                                    }
-                        events.RepeatEvent(2000);
-                    }
-                    break;
-                case EVENT_SHAMAN_LAVA_BURST:
-                    if (Unit* victim = me->GetVictim())
-                        me->CastSpell(victim, SPELL_SHAMAN_LAVA_BURST, false);
-                    events.RepeatEvent(2600);
-                    break;
-                case EVENT_SHAMAN_STORM_CLOUD:
-                    if (Player* target = ScriptedAI::SelectTargetFromPlayerList(35.0f, SPELL_SHAMAN_STORM_CLOUD))
-                        me->CastSpell(target, SPELL_SHAMAN_STORM_CLOUD, false);
-                    events.RepeatEvent(30000);
-                    break;
+            case 0:
+                break;
+            case EVENT_TRY_FREE_HELPER:
+            {
+                if (!me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC))
+                    if (pInstance)
+                        if (ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR))
+                            if (Creature* hodir = ObjectAccessor::GetCreature(*me, g))
+                            {
+                                AttackStart(hodir);
+                                ScheduleAbilities();
+                                break;
+                            }
+                events.RepeatEvent(2000);
+            }
+            break;
+            case EVENT_SHAMAN_LAVA_BURST:
+                if (Unit* victim = me->GetVictim())
+                    me->CastSpell(victim, SPELL_SHAMAN_LAVA_BURST, false);
+                events.RepeatEvent(2600);
+                break;
+            case EVENT_SHAMAN_STORM_CLOUD:
+                if (Player* target = ScriptedAI::SelectTargetFromPlayerList(35.0f, SPELL_SHAMAN_STORM_CLOUD))
+                    me->CastSpell(target, SPELL_SHAMAN_STORM_CLOUD, false);
+                events.RepeatEvent(30000);
+                break;
             }
         }
 
@@ -1055,7 +1057,7 @@ public:
 
         void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
-            if(spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
+            if (spell->Id == SPELL_FLASH_FREEZE_TRAPPED_NPC)
             {
                 events.Reset();
                 events.ScheduleEvent(EVENT_TRY_FREE_HELPER, 2000);
@@ -1066,58 +1068,58 @@ public:
         {
             events.Update(diff);
 
-            if( me->HasUnitState(UNIT_STATE_CASTING) )
+            if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-            switch( events.ExecuteEvent() )
+            switch (events.ExecuteEvent())
             {
-                case 0:
-                    break;
-                case EVENT_TRY_FREE_HELPER:
-                    {
-                        if( !me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC) )
-                            if( pInstance )
-                                if( ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR) )
-                                    if( Creature* hodir = ObjectAccessor::GetCreature(*me, g) )
-                                    {
-                                        AttackStart(hodir);
-                                        ScheduleAbilities();
-                                        break;
-                                    }
-                        events.RepeatEvent(2000);
-                    }
-                    break;
-                case EVENT_MAGE_FIREBALL:
-                    if (Unit* victim = me->GetVictim())
-                        me->CastSpell(victim, SPELL_MAGE_FIREBALL, false);
-                    events.RepeatEvent(3100);
-                    break;
-                case EVENT_MAGE_TOASTY_FIRE:
-                    me->CastSpell(me, SPELL_MAGE_CONJURE_TOASTY_FIRE, false);
-                    events.RepeatEvent(10000);
-                    break;
-                case EVENT_MAGE_MELT_ICE:
-                    {
-                        std::list<Creature*> FB;
-                        bool found = false;
-                        me->GetCreaturesWithEntryInRange(FB, 150.0f, NPC_FLASH_FREEZE_NPC);
-                        for( std::list<Creature*>::const_iterator itr = FB.begin(); itr != FB.end(); ++itr )
-                            if( !((*itr)->HasAura(SPELL_MAGE_MELT_ICE)) )
+            case 0:
+                break;
+            case EVENT_TRY_FREE_HELPER:
+            {
+                if (!me->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC))
+                    if (pInstance)
+                        if (ObjectGuid g = pInstance->GetGuidData(TYPE_HODIR))
+                            if (Creature* hodir = ObjectAccessor::GetCreature(*me, g))
                             {
-                                me->CastSpell((*itr), SPELL_MAGE_MELT_ICE, false);
-                                found = true;
+                                AttackStart(hodir);
+                                ScheduleAbilities();
                                 break;
                             }
-
-                        if( found )
-                        {
-                            events.DelayEvents(2000);
-                            events.RepeatEvent(1999);
-                            break;
-                        }
-                        events.RepeatEvent(5000);
+                events.RepeatEvent(2000);
+            }
+            break;
+            case EVENT_MAGE_FIREBALL:
+                if (Unit* victim = me->GetVictim())
+                    me->CastSpell(victim, SPELL_MAGE_FIREBALL, false);
+                events.RepeatEvent(3100);
+                break;
+            case EVENT_MAGE_TOASTY_FIRE:
+                me->CastSpell(me, SPELL_MAGE_CONJURE_TOASTY_FIRE, false);
+                events.RepeatEvent(10000);
+                break;
+            case EVENT_MAGE_MELT_ICE:
+            {
+                std::list<Creature*> FB;
+                bool found = false;
+                me->GetCreaturesWithEntryInRange(FB, 150.0f, NPC_FLASH_FREEZE_NPC);
+                for (std::list<Creature*>::const_iterator itr = FB.begin(); itr != FB.end(); ++itr)
+                    if (!((*itr)->HasAura(SPELL_MAGE_MELT_ICE)))
+                    {
+                        me->CastSpell((*itr), SPELL_MAGE_MELT_ICE, false);
+                        found = true;
+                        break;
                     }
+
+                if (found)
+                {
+                    events.DelayEvents(2000);
+                    events.RepeatEvent(1999);
                     break;
+                }
+                events.RepeatEvent(5000);
+            }
+            break;
             }
         }
 
@@ -1143,7 +1145,7 @@ public:
     {
         PrepareSpellScript(spell_hodir_shatter_chestSpellScript)
 
-        void destroyWinterCache()
+            void destroyWinterCache()
         {
             if (Unit* hodir = GetCaster())
                 hodir->GetAI()->DoAction(EVENT_FAIL_HM);
@@ -1170,7 +1172,7 @@ public:
     {
         PrepareAuraScript(spell_hodir_biting_cold_main_aura_AuraScript)
 
-        void HandleEffectPeriodic(AuraEffect const* aurEff)
+            void HandleEffectPeriodic(AuraEffect const* aurEff)
         {
             if ((aurEff->GetTickNumber() % 4) == 0)
                 if (Unit* target = GetTarget())
@@ -1202,8 +1204,10 @@ public:
     {
         PrepareAuraScript(spell_hodir_biting_cold_player_aura_AuraScript)
 
-        uint8 counter {0};
-        bool prev {false};
+            uint8 counter {
+            0
+        };
+        bool prev{ false };
 
         void HandleEffectPeriodic(AuraEffect const*   /*aurEff*/)
         {
@@ -1326,7 +1330,7 @@ public:
     {
         PrepareAuraScript(spell_hodir_flash_freeze_AuraScript)
 
-        void HandleEffectPeriodic(AuraEffect const* aurEff)
+            void HandleEffectPeriodic(AuraEffect const* aurEff)
         {
             if (aurEff->GetTotalTicks() > 0 && aurEff->GetTickNumber() == uint32(aurEff->GetTotalTicks()) - 1)
             {
@@ -1346,7 +1350,7 @@ public:
                 if (target->GetTypeId() == TYPEID_PLAYER)
                 {
                     caster->ToCreature()->AI()->SetData(1, 1);
-                    if( Creature* c = target->SummonCreature(NPC_FLASH_FREEZE_PLR, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 5 * 60 * 1000) )
+                    if (Creature* c = target->SummonCreature(NPC_FLASH_FREEZE_PLR, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 5 * 60 * 1000))
                     {
                         c->CastSpell(target, SPELL_FLASH_FREEZE_TRAPPED_PLAYER, true);
                         caster->ToCreature()->AI()->JustSummoned(c);
@@ -1354,7 +1358,7 @@ public:
                 }
                 else if (target->GetTypeId() == TYPEID_UNIT)
                 {
-                    if( Creature* c = target->SummonCreature(NPC_FLASH_FREEZE_NPC, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000) )
+                    if (Creature* c = target->SummonCreature(NPC_FLASH_FREEZE_NPC, target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                     {
                         c->CastSpell(target, SPELL_FLASH_FREEZE_TRAPPED_NPC, true);
                         caster->ToCreature()->AI()->JustSummoned(c);
@@ -1389,7 +1393,7 @@ public:
     {
         PrepareAuraScript(spell_hodir_storm_power_AuraScript)
 
-        void OnApply(AuraEffect const*  /*aurEff*/, AuraEffectHandleModes /*mode*/)
+            void OnApply(AuraEffect const*  /*aurEff*/, AuraEffectHandleModes /*mode*/)
         {
             if (Unit* caster = GetCaster())
                 if (Aura* a = caster->GetAura(GetId() == SPELL_SHAMAN_STORM_POWER_10 ? SPELL_SHAMAN_STORM_CLOUD_10 : SPELL_SHAMAN_STORM_CLOUD_25))
@@ -1425,7 +1429,7 @@ public:
     {
         PrepareAuraScript(spell_hodir_storm_cloud_AuraScript)
 
-        void HandleEffectPeriodic(AuraEffect const*   /*aurEff*/)
+            void HandleEffectPeriodic(AuraEffect const*   /*aurEff*/)
         {
             PreventDefaultAction();
             if (Unit* target = GetTarget())
