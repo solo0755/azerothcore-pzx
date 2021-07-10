@@ -401,41 +401,41 @@ public:
 
             switch (events.ExecuteEvent())
             {
-            case 0:
-                break;
-            case EVENT_BERSERK:
-            {
-                berserk = true;
-                me->CastSpell(me, SPELL_BERSERK, true);
-                Talk(TEXT_BERSERK);
-            }
-            break;
-            case EVENT_HARD_MODE_MISSED:
-            {
-                Talk(TEXT_HM_MISS);
-                me->CastSpell(me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 400.0f), SPELL_SHATTER_CHEST, false);
-            }
-            break;
-            case EVENT_DESPAWN_CHEST:
-                if (pInstance && pInstance->GetData(TYPE_HODIR) != DONE)
-                    pInstance->SetData(TYPE_HODIR_HM_FAIL, 0);
-                break;
-            case EVENT_FLASH_FREEZE:
-            {
-                std::list<Unit*> targets;
-                Map::PlayerList const& pl = me->GetMap()->GetPlayers();
-                for (Map::PlayerList::const_iterator itr = pl.begin(); itr != pl.end(); ++itr)
-                    targets.push_back(itr->GetSource());
-                targets.remove_if(acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
-                targets.remove_if(acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
-                acore::Containers::RandomResizeList(targets, (RAID_MODE(2, 3)));
-                for (std::list<Unit*>::const_iterator itr = targets.begin(); itr != targets.end(); ++itr)
-                {
-                    float prevZ = (*itr)->GetPositionZ();
-                    (*itr)->m_positionZ = 432.7f;
-                    (*itr)->CastSpell((*itr), SPELL_ICICLE_VISUAL_PACKED, true);
-                    (*itr)->m_positionZ = prevZ;
-                }
+                case 0:
+                    break;
+                case EVENT_BERSERK:
+                    {
+                        berserk = true;
+                        me->CastSpell(me, SPELL_BERSERK, true);
+                        Talk(TEXT_BERSERK);
+                    }
+                    break;
+                case EVENT_HARD_MODE_MISSED:
+                    {
+                        Talk(TEXT_HM_MISS);
+                        me->CastSpell(me->FindNearestGameObject(GO_HODIR_CHEST_HARD, 400.0f), SPELL_SHATTER_CHEST, false);
+                    }
+                    break;
+                case EVENT_DESPAWN_CHEST:
+                    if (pInstance && pInstance->GetData(TYPE_HODIR) != DONE)
+                        pInstance->SetData(TYPE_HODIR_HM_FAIL, 0);
+                    break;
+                case EVENT_FLASH_FREEZE:
+                    {
+                        std::list<Unit*> targets;
+                        Map::PlayerList const& pl = me->GetMap()->GetPlayers();
+                        for (Map::PlayerList::const_iterator itr = pl.begin(); itr != pl.end(); ++itr)
+                            targets.push_back(itr->GetSource());
+                        targets.remove_if(Acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
+                        targets.remove_if(Acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
+                        Acore::Containers::RandomResize(targets, (RAID_MODE(2,3)));
+                        for (std::list<Unit*>::const_iterator itr = targets.begin(); itr != targets.end(); ++itr)
+                        {
+                            float prevZ = (*itr)->GetPositionZ();
+                            (*itr)->m_positionZ = 432.7f;
+                            (*itr)->CastSpell((*itr), SPELL_ICICLE_VISUAL_PACKED, true);
+                            (*itr)->m_positionZ = prevZ;
+                        }
 
                 me->CastSpell((Unit*)nullptr, SPELL_FLASH_FREEZE_CAST, false);
                 me->PlayDirectSound(SOUND_HODIR_FLASH_FREEZE, 0);
@@ -1275,9 +1275,9 @@ public:
 
         void FilterTargets(std::list<WorldObject*>& targets)
         {
-            targets.remove_if(acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
-            targets.remove_if(acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
-            acore::Containers::RandomResizeList(targets, 1);
+            targets.remove_if(Acore::ObjectTypeIdCheck(TYPEID_PLAYER, false));
+            targets.remove_if(Acore::UnitAuraCheck(true, SPELL_FLASH_FREEZE_TRAPPED_PLAYER));
+            Acore::Containers::RandomResize(targets, 1);
         }
 
         void Register() override
@@ -1453,7 +1453,7 @@ class achievement_cheese_the_freeze : public AchievementCriteriaScript
 public:
     achievement_cheese_the_freeze() : AchievementCriteriaScript("achievement_cheese_the_freeze") {}
 
-    bool OnCheck(Player*  /*player*/, Unit* target) override
+    bool OnCheck(Player*  /*player*/, Unit* target, uint32 /*criteria_id*/) override
     {
         return target && target->GetEntry() == NPC_HODIR && target->GetTypeId() == TYPEID_UNIT && target->ToCreature()->AI()->GetData(1);
     }
@@ -1464,7 +1464,7 @@ class achievement_getting_cold_in_here : public AchievementCriteriaScript
 public:
     achievement_getting_cold_in_here() : AchievementCriteriaScript("achievement_getting_cold_in_here") {}
 
-    bool OnCheck(Player*  /*player*/, Unit* target) override
+    bool OnCheck(Player*  /*player*/, Unit* target, uint32 /*criteria_id*/) override
     {
         return target && target->GetEntry() == NPC_HODIR && target->GetTypeId() == TYPEID_UNIT && target->ToCreature()->AI()->GetData(2);
     }
@@ -1475,7 +1475,7 @@ class achievement_i_could_say_that_this_cache_was_rare : public AchievementCrite
 public:
     achievement_i_could_say_that_this_cache_was_rare() : AchievementCriteriaScript("achievement_i_could_say_that_this_cache_was_rare") {}
 
-    bool OnCheck(Player*  /*player*/, Unit* target) override
+    bool OnCheck(Player*  /*player*/, Unit* target, uint32 /*criteria_id*/) override
     {
         return target && target->GetEntry() == NPC_HODIR && target->GetTypeId() == TYPEID_UNIT && target->ToCreature()->AI()->GetData(3);
     }
@@ -1486,7 +1486,7 @@ class achievement_i_have_the_coolest_friends : public AchievementCriteriaScript
 public:
     achievement_i_have_the_coolest_friends() : AchievementCriteriaScript("achievement_i_have_the_coolest_friends") {}
 
-    bool OnCheck(Player*  /*player*/, Unit* target) override
+    bool OnCheck(Player*  /*player*/, Unit* target, uint32 /*criteria_id*/) override
     {
         return target && target->GetEntry() == NPC_HODIR && target->GetTypeId() == TYPEID_UNIT && target->ToCreature()->AI()->GetData(4);
     }
@@ -1497,7 +1497,7 @@ class achievement_staying_buffed_all_winter_10 : public AchievementCriteriaScrip
 public:
     achievement_staying_buffed_all_winter_10() : AchievementCriteriaScript("achievement_staying_buffed_all_winter_10") {}
 
-    bool OnCheck(Player* player, Unit*  /*target*/) override
+    bool OnCheck(Player* player, Unit*  /*target*/, uint32 /*criteria_id*/) override
     {
         return player && player->HasAura(SPELL_MAGE_TOASTY_FIRE_AURA) && player->HasAura(SPELL_DRUID_STARLIGHT_AREA_AURA) && player->HasAura(SPELL_SHAMAN_STORM_POWER_10);
     }
@@ -1508,7 +1508,7 @@ class achievement_staying_buffed_all_winter_25 : public AchievementCriteriaScrip
 public:
     achievement_staying_buffed_all_winter_25() : AchievementCriteriaScript("achievement_staying_buffed_all_winter_25") {}
 
-    bool OnCheck(Player* player, Unit*  /*target*/) override
+    bool OnCheck(Player* player, Unit*  /*target*/, uint32 /*criteria_id*/) override
     {
         return player && player->HasAura(SPELL_MAGE_TOASTY_FIRE_AURA) && player->HasAura(SPELL_DRUID_STARLIGHT_AREA_AURA) && player->HasAura(SPELL_SHAMAN_STORM_POWER_25);
     }
