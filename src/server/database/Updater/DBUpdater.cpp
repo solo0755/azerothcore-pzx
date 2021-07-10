@@ -24,7 +24,7 @@ std::string DBUpdaterUtil::GetCorrectedMySQLExecutable()
         GetCorrectedMySQLExecutable= corrected_path();
     else
         GetCorrectedMySQLExecutable= BuiltInConfig::GetMySQLExecutable();
-    LOG_INFO("sql.driver", "pzx test1 '%s' ", GetCorrectedMySQLExecutable);
+    LOG_INFO("sql.driver", "pzx test1 '%s' ", GetCorrectedMySQLExecutable.c_str());
     return GetCorrectedMySQLExecutable;
 }
 
