@@ -35,19 +35,23 @@ bool DBUpdaterUtil::CheckExecutable()
     LOG_INFO("sql.driver", "pzx test2 [] ");
     if (!is_regular_file(exe))
     {
+        LOG_INFO("sql.driver", "pzx test3 [] ");
         exe = Acore::SearchExecutableInPath("mysql");
+        LOG_INFO("sql.driver", "pzx test4 [] ");
         if (!exe.empty() && is_regular_file(exe))
         {
+            LOG_INFO("sql.driver", "pzx test5 [] ");
             // Correct the path to the cli
             corrected_path() = absolute(exe).generic_string();
             return true;
         }
-
+        LOG_INFO("sql.driver", "pzx test6 [] ");
         LOG_FATAL("sql.updates", "Didn't find any executable MySQL binary at \'%s\' or in path, correct the path in the *.conf (\"MySQLExecutable\").",
             absolute(exe).generic_string().c_str());
-
+        LOG_INFO("sql.driver", "pzx test7 [] ");
         return false;
     }
+    LOG_INFO("sql.driver", "pzx test8 [] ");
     return true;
 }
 
