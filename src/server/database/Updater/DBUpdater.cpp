@@ -19,15 +19,20 @@
 
 std::string DBUpdaterUtil::GetCorrectedMySQLExecutable()
 {
+    std::string GetCorrectedMySQLExecutable = "";
     if (!corrected_path().empty())
-        return corrected_path();
+        GetCorrectedMySQLExecutable= corrected_path();
     else
-        return BuiltInConfig::GetMySQLExecutable();
+        GetCorrectedMySQLExecutable= BuiltInConfig::GetMySQLExecutable();
+    LOG_INFO("sql.driver", "pzx test1 '%s' ", GetCorrectedMySQLExecutable);
+    return GetCorrectedMySQLExecutable;
 }
 
 bool DBUpdaterUtil::CheckExecutable()
 {
+
     std::filesystem::path exe(GetCorrectedMySQLExecutable());
+    LOG_INFO("sql.driver", "pzx test2 [] ");
     if (!is_regular_file(exe))
     {
         exe = Acore::SearchExecutableInPath("mysql");
