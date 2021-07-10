@@ -213,8 +213,8 @@ bool DBUpdater<T>::Create(DatabaseWorkerPool<T>& pool)
 template<class T>
 bool DBUpdater<T>::Update(DatabaseWorkerPool<T>& pool)
 {
-    if (!DBUpdaterUtil::CheckExecutable())
-        return false;
+    //if (!DBUpdaterUtil::CheckExecutable())
+    //    return false;
 
     LOG_INFO("sql.updates", "Updating %s database...", DBUpdater<T>::GetTableName().c_str());
 
