@@ -26771,7 +26771,7 @@ void Player::_SaveCharacter(bool create, CharacterDatabaseTransaction trans)
 
     //PZX 幻化的保存部分
     index = 0;
-    PreparedStatement* stmt2 = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHARACTER_HUANHUA);
+    auto* stmt2 = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHARACTER_HUANHUA);
     // cache equipment...
     std::ostringstream ss_copy;
     ss_copy.str("");

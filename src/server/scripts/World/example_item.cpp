@@ -111,7 +111,7 @@ public:
 		return true;
 	}
 
-	bool teleToPoint(Player *player, string xyz, uint32 needval) {
+	bool teleToPoint(Player *player, std::string xyz, uint32 needval) {
 		uint32 accID = player->GetSession()->GetAccountId();
 		uint32 mypoint = sPzxMgr->getMyPoint(accID);
 
@@ -216,7 +216,7 @@ public:
 				if (action == 4001) {
 					//talentST  readPlay = readFromDB(player, true);
 					//PSendSysMessage(player, u8"|cffff0000[系统消息]:|h|r您的第2套天赋功能已经开通，现在可以通过[|cffeb8920懦夫救星|h|r]设置新的天赋树");
-					//player->CLOSE_GOSSIP_MENU();
+					//CloseGossipMenuFor(player);
 				}
 				PSendSysMessage(player, u8"[系统消息]:您的%s开通成功", txt);
 			}
@@ -227,7 +227,7 @@ public:
 		return true;
 	}
 
-	void outputItemColorFormat(Player *player, ostringstream &itemret, uint32 itemID, const char *format) {
+	void outputItemColorFormat(Player *player, std::ostringstream &itemret, uint32 itemID, const char *format) {
 		const ItemTemplate* pProto = sObjectMgr->GetItemTemplate(itemID);
 		if (pProto) {
 			const char * colorItemPre = ItemQualityColorsStr[pProto->Quality];
@@ -273,26 +273,26 @@ public:
 							continue;
 
 						// wrong skill
-						if (skillLine->skillId != skill)
+						if (skillLine->SkillLine != skill)
 							continue;
 
 						// not high rank
-						if (skillLine->forward_spellid)
+						if (skillLine->SupercededBySpell)
 							continue;
 
 						// skip racial skills
-						if (skillLine->racemask != 0)
+						if (skillLine->RaceMask != 0)
 							continue;
 
 						// skip wrong class skills
-						if (skillLine->classmask && (skillLine->classmask & classmask) == 0)
+						if (skillLine->ClassMask && (skillLine->ClassMask & classmask) == 0)
 							continue;
 
-						SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(skillLine->spellId);
+						SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(skillLine->Spell);
 						if (!spellInfo || !SpellMgr::IsSpellValid(spellInfo))
 							continue;
 
-						pPlayer->learnSpell(skillLine->spellId);
+						pPlayer->learnSpell(skillLine->Spell);
 					}
 
 					uint16 maxLevel = pPlayer->GetPureMaxSkillValue(skill);
@@ -320,7 +320,7 @@ public:
 
 	}
 	bool cutPointAndAddItem(Player *player, uint32 items, uint32 needval, uint32 count) {
-		ostringstream outs;
+		std::ostringstream outs;
 		const ItemTemplate* pProto = sObjectMgr->GetItemTemplate(items);
 		if (player->HasItemCount(items, 1, true) && pProto->MaxCount == 1) {//唯一物品检测
 			outputItemColorFormat(player, outs, items, u8"[系统消息]:%s已经在物品清单中");
@@ -399,36 +399,36 @@ public:
 
 	}
 
-	string changeName(string _name, Player *player, MenuTree* tree) {
-		string name(_name);
+    std::string changeName(std::string _name, Player *player, MenuTree* tree) {
+        std::string name(_name);
 		uint32 accID = player->GetSession()->GetAccountId();
 
-		string  pointT = to_string(tree->needval);
-		regex  patternT("DDD");
+        std::string  pointT = std::to_string(tree->needval);
+        std::regex  patternT("DDD");
 		name = regex_replace(name, patternT, pointT);
 
 		uint32 mypoint = sPzxMgr->getMyPoint(accID);
-		string  timeT = to_string(mypoint);
-		regex  patternD("TTT");
+        std::string  timeT = std::to_string(mypoint);
+        std::regex  patternD("TTT");
 		name = regex_replace(name, patternD, timeT);
 
-		regex pattern("[$]{1}\\d{4,}");
+        std::regex pattern("[$]{1}\\d{4,}");
 		//$60001|t  菜单与类型
 
-		smatch result;
+        std::smatch result;
 		//regex pattern("\\d{4}");	//匹配四个数字
 
 		//迭代器声明
-		string::const_iterator iterStart = name.begin();
-		string::const_iterator iterEnd = name.end();
-		string temp;
+        std::string::const_iterator iterStart = name.begin();
+        std::string::const_iterator iterEnd = name.end();
+        std::string temp;
 		while (regex_search(iterStart, iterEnd, result, pattern))
 		{
 			temp = result[0];
 			iterStart = result[0].second;	//更新搜索起始位置,搜索剩下的字符串
 		}
 		if (temp.length() > 0) {
-			string id = temp.substr(1);//截取$获取字符串
+            std::string id = temp.substr(1);//截取$获取字符串
 			int i_id = stoi(id);
 			MenuTree _tree = sPzxMgr->getTreeByID(i_id);
 			uint32 ty = _tree.type;
@@ -445,21 +445,21 @@ public:
 						dist = 1;
 					}
 				}
-				name = regex_replace(name, pattern, to_string(dist));
+				name = regex_replace(name, pattern, std::to_string(dist));
 			}
 		}
 		//物品内置时长
 		iterStart = name.begin();
 		iterEnd = name.end();
 		temp = "";
-		regex ItemIDpattern("[#]{1}\\d{2,}");
+        std::regex ItemIDpattern("[#]{1}\\d{2,}");
 		while (regex_search(iterStart, iterEnd, result, ItemIDpattern))
 		{
 			temp = result[0];
 			iterStart = result[0].second;	//更新搜索起始位置,搜索剩下的字符串
 		}
 		if (temp.length() > 0) {
-			string id = temp.substr(1);//截取$获取字符串
+            std::string id = temp.substr(1);//截取$获取字符串
 			int item_id = stoi(id);
 
 			if (!player->HasItemCount(item_id, 1, true))
@@ -486,7 +486,7 @@ public:
 					if (dist <1) {
 						dist = 1;
 					}
-					name = regex_replace(name, ItemIDpattern, to_string(dist));
+					name = regex_replace(name, ItemIDpattern, std::to_string(dist));
 				}
 
 			}
@@ -513,7 +513,7 @@ public:
 				continue;
 			}
 			//sLog->outString(">>menuInfo %d %s", id, tree.name);
-			string name = changeName(tree.name, player, &tree);//菜单名字
+            std::string name = changeName(tree.name, player, &tree);//菜单名字
 			if (name.length() > 0) {//一般都是过期或者未开通
 				if (unionid) {//有关联项检查
 					if (unionid == 4001) {
@@ -522,32 +522,32 @@ public:
 						if (oldVel == 0) {
 
 							if (!unioncheck) {//第一次开通（没开通过），做异常检查
-								player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+								 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 							}
 						}
 						else {
 							if (time(nullptr) > oldVel + unionTree.itemid) {//过期了，重新开通
 								if (!unioncheck) {//互斥检查，异常检查
-									player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+									 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 								}
 							}
 							else {//没有过期
 								if (unioncheck) {//互斥检查，正常检查
-									player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+									 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 								}
 							}
 						}
 					}
 				}
 				else
-					player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+					 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 			}
 		}
 		if (player->IsGameMaster()) {
-			player->ADD_GOSSIP_ITEM_EXTENDED(0, u8"重新加载服务器个性化配置", GOSSIP_SENDER_MAIN, 999, "reload config", 0, false);
+			AddGossipItemFor(player,0, u8"重新加载服务器个性化配置", GOSSIP_SENDER_MAIN, 999, "reload config", 0, false);
 		}
 
-		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
+		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 	}
     // Triggers when the item executes the spell assigned to it
     // If you don't want a spell executed, assign the "Dummy Spell" (ID: 18282)
@@ -732,7 +732,7 @@ public:
 		case 999:
 			sPzxMgr->Reload();
             sConfigMgr->Reload();
-			player->CLOSE_GOSSIP_MENU();
+			CloseGossipMenuFor(player);
 			return;
 		case 100:
 			showMenu(player, item);
@@ -749,7 +749,7 @@ public:
 			CharaMenuMap mmap = getTree.children;
 			uint32 newActionID = getTree.id;
 			if (mmap.size() > 0) {//涵盖子菜单
-				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
+				SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 				CharaMenuMap::iterator it;
 				for (it = mmap.begin(); it != mmap.end(); it++) {
 
@@ -760,22 +760,23 @@ public:
 						continue;
 					}
 					//TODO 此处不坚持union项
-					string name = changeName(tree.name, player, &tree);//菜单名字
+                    std::string name = changeName(tree.name, player, &tree);//菜单名字
 					if (tree.popMenu) {//弹出确认框,用小姨子做语言提升
-						player->ADD_GOSSIP_ITEM_EXTENDED(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id, tree.xyz, 0,false);
+						AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id, tree.xyz, 0,false);
 					}
 					else {
 						if (tree.unionID) {
 							if (sPzxMgr->getAcctType(player->GetSession()->GetAccountId(), tree.unionID) == 0)//第一次开通（没开通过），有抽奖
-								player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+								 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 						}
 						else {
-							player->ADD_GOSSIP_ITEM(tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
+							 AddGossipItemFor(player,tree.iconID, name.c_str(), GOSSIP_SENDER_MAIN, id);
 						}
 					}
 				}
-				player->ADD_GOSSIP_ITEM(0, u8"返回主菜单", GOSSIP_SENDER_MAIN, 100);
-				player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
+                AddGossipItemFor(player,0, u8"返回主菜单", GOSSIP_SENDER_MAIN, 100);
+                
+				SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, item->GetGUID());
 				return ;
 			}
 			else {//动作菜单
@@ -809,13 +810,14 @@ public:
 					break;
 				}
 
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 			}
 		}
 		else {//没有子菜单
-			player->CLOSE_GOSSIP_MENU();
+			CloseGossipMenuFor(player);
 		}
-		player->CLOSE_GOSSIP_MENU();
+        CloseGossipMenuFor(player);
+		//CloseGossipMenuFor(player);
        // return true;
     }
 
@@ -827,7 +829,7 @@ public:
 		if (action == 1001) {
 			/*	if (!player->HasItemCount(sPzxConfig.GetIntDefault("vipItemID", 40003), 1, true)) {
 			PSendSysMessage(player, u8"[系统消息]:需要VIP认证卡才可以使用本功能，请联系GM获取");
-			player->CLOSE_GOSSIP_MENU();
+			CloseGossipMenuFor(player);
 
 			return false;
 			}*/
@@ -837,13 +839,13 @@ public:
 				getItemID = std::stoi(code);
 				if (getItemID <= 0) {
 					PSendSysMessage(player, u8"[系统消息]:请输入正确的物品ID");
-					player->CLOSE_GOSSIP_MENU();
+					CloseGossipMenuFor(player);
 					return;
 				}
 			}
 			catch (...) {
 				PSendSysMessage(player, u8"[系统消息]:请输入正确的物品ID");
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 				return;
 			}
 
@@ -875,7 +877,7 @@ public:
 						PSendSysMessage(player, u8"[系统消息]:获取物品等级过高，请联系GM");
 						
 					}
-					player->CLOSE_GOSSIP_MENU();
+					CloseGossipMenuFor(player);
 					return;
 				}
 
@@ -885,7 +887,7 @@ public:
 
 		}
 
-		player->CLOSE_GOSSIP_MENU();
+		CloseGossipMenuFor(player);
 		return;
     }
 };

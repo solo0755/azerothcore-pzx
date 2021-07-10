@@ -235,7 +235,6 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket& recvData)
     if (!unit)
     {
         LOG_DEBUG("network", "WORLD: HandleTrainerBuySpellOpcode - Unit (%s) not found or you can not interact with him.", guid.ToString().c_str());
-#endif
         if (GetPlayer()->GetTrainerEntry())
         {
             // remove fake death
