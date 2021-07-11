@@ -43,7 +43,6 @@ bool DBUpdaterUtil::CheckExecutable()
 
         return false;
     }
-    LOG_INFO("sql.driver", "find mysql path exe");
     return true;
 }
 
@@ -207,7 +206,6 @@ bool DBUpdater<T>::Update(DatabaseWorkerPool<T>& pool)
 {
     if (!DBUpdaterUtil::CheckExecutable())
         return false;
-    LOG_INFO("sql.driver", "find mysql path exe2");
     LOG_INFO("sql.updates", "Updating %s database...", DBUpdater<T>::GetTableName().c_str());
 
     Path const sourceDirectory(BuiltInConfig::GetSourceDirectory());
@@ -289,7 +287,6 @@ bool DBUpdater<T>::Populate(DatabaseWorkerPool<T>& pool)
 
     if (!DBUpdaterUtil::CheckExecutable())
         return false;
-    LOG_INFO("sql.driver", "find mysql path exe1");
     LOG_INFO("sql.updates", "Database %s is empty, auto populating it...", DBUpdater<T>::GetTableName().c_str());
 
     std::string const DirPathStr = DBUpdater<T>::GetBaseFilesDirectory();
