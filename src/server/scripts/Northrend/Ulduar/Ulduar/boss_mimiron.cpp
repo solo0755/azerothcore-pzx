@@ -455,12 +455,14 @@ public:
                             if( !pg.empty() )
                             {
                                 uint8 index = urand(0, pg.size() - 1);
-                                Player* p = pg[index];
+                                Player* player = pg[index];
                                 float angle = rand_norm() * 2 * M_PI;
                                 float z = 364.35f;
-                                if (!p->IsWithinLOS(p->GetPositionX() + cos(angle) * 5.0f, p->GetPositionY() + sin(angle) * 5.0f, z))
-                                    angle = p->GetAngle(2744.65f, 2569.46f);
-                                me->CastSpell(p->GetPositionX() + cos(angle) * 5.0f, p->GetPositionY() + sin(angle) * 5.0f, z, SPELL_SUMMON_FLAMES_INITIAL, true);
+                                if (!player->IsWithinLOS(player->GetPositionX() + cos(angle) * 5.0f, player->GetPositionY() + sin(angle) * 5.0f, z))
+                                {
+                                    angle = player->GetAngle(2744.65f, 2569.46f);
+                                }
+                                me->CastSpell(player->GetPositionX() + cos(angle) * 5.0f, player->GetPositionY() + sin(angle) * 5.0f, z, SPELL_SUMMON_FLAMES_INITIAL, true);
                                 pg.erase(pg.begin() + index);
                             }
 
@@ -1159,9 +1161,10 @@ public:
                     events.ScheduleEvent(EVENT_PROXIMITY_MINES_1, 8000);
                     break;
                 case EVENT_PROXIMITY_MINES_1:
-                    //PZX 召唤地雷问题，换成法术
                     for (uint8 i = 0; i < 10; ++i)
+                    {
                         me->CastSpell(me, SPELL_SUMMON_PROXIMITY_MINE, true);
+                    }
                     break;
                 case EVENT_FLAME_SUPPRESSION_50000:
                     me->CastSpell(me, SPELL_FLAME_SUPPRESSANT_50000yd, false);
@@ -2312,7 +2315,7 @@ public:
 
         void RemoveAll()
         {
-            for (ObjectGuid guid : FlameList)
+            for (ObjectGuid const& guid : FlameList)
                 if (Creature* c = ObjectAccessor::GetCreature(*me, guid))
                     c->DespawnOrUnsummon();
             FlameList.clear();

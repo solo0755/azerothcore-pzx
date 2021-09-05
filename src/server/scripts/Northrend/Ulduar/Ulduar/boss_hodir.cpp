@@ -437,36 +437,40 @@ public:
                             (*itr)->m_positionZ = prevZ;
                         }
 
-                me->CastSpell((Unit*)nullptr, SPELL_FLASH_FREEZE_CAST, false);
-                me->PlayDirectSound(SOUND_HODIR_FLASH_FREEZE, 0);
-                Talk(TEXT_FLASH_FREEZE);
-                Talk(TEXT_EMOTE_FREEZE);
-                SmallIcicles(false);
-                events.ScheduleEvent(EVENT_FLASH_FREEZE, urand(48000, 49000));
-                events.ScheduleEvent(EVENT_SMALL_ICICLES_ENABLE, Is25ManRaid() ? 12000 : 24000);
-                events.ScheduleEvent(EVENT_FROZEN_BLOWS, 15000);
-                events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
-            }
-            break;
-            case EVENT_SMALL_ICICLES_ENABLE:
-            {
-                SmallIcicles(true);
-            }
-            break;
-            case EVENT_FROZEN_BLOWS:
-            {
-                Talk(TEXT_EMOTE_BLOW);
-                Talk(TEXT_STALACTITE);
-                me->CastSpell(me, Is25ManRaid() ? SPELL_FROZEN_BLOWS_25 : SPELL_FROZEN_BLOWS_10, true);
-            }
-            break;
-            case EVENT_FREEZE:
-                if (Player* plr = SelectTargetFromPlayerList(50.0f, SPELL_FLASH_FREEZE_TRAPPED_PLAYER))
-                    me->CastSpell(plr, SPELL_FREEZE, false);
-                else if (Unit* plr = SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f, true))
-                    me->CastSpell(plr, SPELL_FREEZE, false);
-                events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
-                break;
+                        me->CastSpell((Unit*)nullptr, SPELL_FLASH_FREEZE_CAST, false);
+                        me->PlayDirectSound(SOUND_HODIR_FLASH_FREEZE, 0);
+                        Talk(TEXT_FLASH_FREEZE);
+                        Talk(TEXT_EMOTE_FREEZE);
+                        SmallIcicles(false);
+                        events.ScheduleEvent(EVENT_FLASH_FREEZE, urand(48000, 49000));
+                        events.ScheduleEvent(EVENT_SMALL_ICICLES_ENABLE, Is25ManRaid() ? 12000 : 24000);
+                        events.ScheduleEvent(EVENT_FROZEN_BLOWS, 15000);
+                        events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
+                    }
+                    break;
+                case EVENT_SMALL_ICICLES_ENABLE:
+                    {
+                        SmallIcicles(true);
+                    }
+                    break;
+                case EVENT_FROZEN_BLOWS:
+                    {
+                        Talk(TEXT_EMOTE_BLOW);
+                        Talk(TEXT_STALACTITE);
+                        me->CastSpell(me, Is25ManRaid()? SPELL_FROZEN_BLOWS_25 : SPELL_FROZEN_BLOWS_10, true);
+                    }
+                    break;
+                case EVENT_FREEZE:
+                    if (Player* plr = SelectTargetFromPlayerList(50.0f, SPELL_FLASH_FREEZE_TRAPPED_PLAYER))
+                    {
+                        me->CastSpell(plr, SPELL_FREEZE, false);
+                    }
+                    else if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 50.0f, true))
+                    {
+                        me->CastSpell(target, SPELL_FREEZE, false);
+                    }
+                    events.RescheduleEvent(EVENT_FREEZE, urand(17000, 20000));
+                    break;
             }
 
             DoMeleeAttackIfReady();
@@ -665,8 +669,8 @@ public:
                         if ((s->GetTypeId() == TYPEID_PLAYER && !s->HasAura(SPELL_FLASH_FREEZE_TRAPPED_PLAYER)) || (s->GetTypeId() == TYPEID_UNIT && !s->HasAura(SPELL_FLASH_FREEZE_TRAPPED_NPC)))
                             me->DespawnOrUnsummon(2000);
                         else if (s->GetTypeId() == TYPEID_PLAYER)
-                            if (InstanceScript* pInstance = me->GetInstanceScript())
-                                if (pInstance->GetData(TYPE_HODIR) == NOT_STARTED)
+                            if (InstanceScript* instanceScript = me->GetInstanceScript())
+                                if (instanceScript->GetData(TYPE_HODIR) == NOT_STARTED)
                                 {
                                     s->CastSpell(s, SPELL_FLASH_FREEZE_INSTAKILL, true);
                                     me->DespawnOrUnsummon(2000);
@@ -1341,9 +1345,13 @@ public:
 
                 if (Aura* aur = target->GetAura(target->GetTypeId() == TYPEID_PLAYER ? SPELL_FLASH_FREEZE_TRAPPED_PLAYER : SPELL_FLASH_FREEZE_TRAPPED_NPC))
                 {
-                    if (Unit* caster = aur->GetCaster())
-                        if (caster->GetTypeId() == TYPEID_UNIT)
-                            caster->ToCreature()->DespawnOrUnsummon();
+                    if (Unit* caster2 = aur->GetCaster())
+                    {
+                        if (caster2->GetTypeId() == TYPEID_UNIT)
+                        {
+                            caster2->ToCreature()->DespawnOrUnsummon();
+                        }
+                    }
                     target->CastSpell(target, SPELL_FLASH_FREEZE_INSTAKILL, true);
                     return;
                 }

@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ubuntu-20.04]
     runs-on: ${{ matrix.os }}
-    if: github.repository == 'azerothcore/azerothcore-wotlk' && github.event.label.name == 'run-build'
+    if: github.repository == 'azerothcore/azerothcore-wotlk' && github.event.label.name == 'run-build' || github.ref == 'refs/heads/master'
     env:
       COMPOSE_DOCKER_CLI_BUILD: 1
       DOCKER_BUILDKIT: 1
@@ -101,6 +101,6 @@ jobs:
       - name: Deploy Production images
         #env:
         #  DOCKER_IMAGE_TAG: ${{ steps.extract_branch.outputs.branch }}
-        if: ${{ steps.extract_branch.outputs.branch == 'master' }}
+        if: github.repository == 'azerothcore/azerothcore-wotlk' && steps.extract_branch.outputs.branch == 'master'
         run: |
           docker-compose --profile prod push
