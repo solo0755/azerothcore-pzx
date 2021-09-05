@@ -4,7 +4,6 @@
 #include "ScriptMgr.h"
 #include "Group.h"
 #include "Config.h"
-#include "PzxMgr.h"
 #include "Pet.h"
 #include "Chat.h"
 #include "Player.h"

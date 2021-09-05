@@ -10,6 +10,7 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <openssl/crypto.h> //PZX compile error
 std::vector<std::mutex*> cryptoLocks;
 static void lockingCallback(int mode, int type, char const* /*file*/, int /*line*/)
 {
