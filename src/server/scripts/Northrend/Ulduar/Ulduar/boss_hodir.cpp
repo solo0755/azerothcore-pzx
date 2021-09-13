@@ -375,7 +375,6 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            //if (!IsInRoom(&ENTRANCE_DOOR, Axis::AXIS_Y, false) || !IsInRoom(&EXIT_DOOR, Axis::AXIS_Y, true))
             if (me->GetPositionY() <= ENTRANCE_DOOR.GetPositionY() || me->GetPositionY() >= EXIT_DOOR.GetPositionY())
             {
                 boss_hodirAI::EnterEvadeMode();
