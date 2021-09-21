@@ -12768,8 +12768,10 @@ void Unit::CombatStart(Unit* victim, bool initialAggro)
 
         SetInCombatWith(victim);
         victim->SetInCombatWith(this);
-        victim->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_NONE);
-
+        if (victim->GetName() != "VX-001")//VX-001不转头的BUG
+        {
+            victim->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_NONE);
+        }
         // Xinef: If pet started combat - put owner in combat
         if (Unit* owner = GetOwner())
         {
