@@ -2208,8 +2208,6 @@ public:
             {
                 if (c->GetTypeId() != TYPEID_UNIT)
                     return;
-                c->SendMeleeAttackStop();
-                c->SendClearTarget();
                 uint32 diff = getMSTimeDiff(lastMSTime, World::GetGameTimeMS());
                 if (lastOrientation == -1.0f)
                 {
