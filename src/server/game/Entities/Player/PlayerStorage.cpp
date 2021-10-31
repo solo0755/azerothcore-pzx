@@ -5653,6 +5653,34 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
         if (!HasAuraState((AuraStateType)m_spellInfo->CasterAuraState))
             aura->HandleAllEffects(itr->second, AURA_EFFECT_HANDLE_REAL, false);
     }
+
+    // pzx 最后加载幻化 幻化自定义内容  读取数据库记录
+    QueryResult result_huanh = CharacterDatabase.PQuery("select huanhua from _character_hh where guid='%u'", GetGUID().GetCounter());
+    if (!result_huanh)
+    {
+        sLog->outString(">> Loaded 0 huanhua for %u", GetGUID().GetCounter());
+        return true;
+    }
+
+    do
+    {
+        Field*      fields  = result_huanh->Fetch();
+        std::string huanhua = fields[0].GetString();
+
+        Tokenizer tokens(huanhua, ' ');
+        int       i = 0;
+        for (Tokenizer::const_iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
+        {
+            uint32 node = uint32(atol(*iter));
+            if (node > 0)
+            {
+                SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET, node);
+            }
+            i++;
+        }
+
+    } while (result_huanh->NextRow());
+
     return true;
 }
 
