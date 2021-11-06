@@ -28,7 +28,6 @@
 #if defined(TRINITY) || defined(AZEROTHCORE)
 typedef QueryResult ElunaQuery;
 #define GET_GUID                GetGUID
-
 #define HIGHGUID_PLAYER         HighGuid::Player
 #define HIGHGUID_UNIT           HighGuid::Unit
 #define HIGHGUID_ITEM           HighGuid::Item

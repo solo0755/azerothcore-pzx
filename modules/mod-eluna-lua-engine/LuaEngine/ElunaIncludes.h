@@ -48,7 +48,6 @@
 #include "MapManager.h"
 #endif
 
-
 #if defined TRINITY || defined AZEROTHCORE
 #include "Config.h"
 #include "GameEventMgr.h"

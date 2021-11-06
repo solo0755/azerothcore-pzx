@@ -109,6 +109,7 @@ struct ElunaCreatureAI : ScriptedAI
 #endif
         }
     }
+
     //Called at creature death
     void JustDied(Unit* killer) override
     {

@@ -20,6 +20,7 @@
 #include "World.h"
 #include "Hooks.h"
 #include "ElunaUtility.h"
+#include "HttpManager.h"
 #include <mutex>
 #include <memory>
 
@@ -178,7 +179,6 @@ private:
     void DestroyBindStores();
     void CreateBindStores();
     void InvalidateObjects();
-    bool ExecuteCall(int params, int res);
 
     // Use ReloadEluna() to make eluna reload
     // This is called on world update to reload eluna
@@ -237,6 +237,7 @@ public:
 
     lua_State* L;
     EventMgr* eventMgr;
+    HttpManager httpManager;
 
     BindingMap< EventKey<Hooks::ServerEvents> >*     ServerEventBindings;
     BindingMap< EventKey<Hooks::PlayerEvents> >*     PlayerEventBindings;
@@ -301,6 +302,8 @@ public:
         ElunaTemplate<T>::Push(luastate, ptr);
     }
 
+    bool ExecuteCall(int params, int res);
+
     /*
      * Returns `true` if Eluna has instance data for `map`.
      */
@@ -364,6 +367,7 @@ public:
     void OnLuaStateClose();
     void OnLuaStateOpen();
     bool OnAddonMessage(Player* sender, uint32 type, std::string& msg, Player* receiver, Guild* guild, Group* group, Channel* channel);
+    void OnPetAddedToWorld(Player* player, Creature* pet);
 
     /* Item */
     void OnDummyEffect(WorldObject* pCaster, uint32 spellId, SpellEffIndex effIndex, Item* pTarget);

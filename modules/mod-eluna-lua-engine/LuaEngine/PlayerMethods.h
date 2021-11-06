@@ -1382,6 +1382,20 @@ namespace LuaPlayer
     }
 
     /**
+     * Returns a mailed [Item] by guid.
+     *
+     * @param ObjectGuid guid : an item guid
+     * @return [Item] item
+     */
+    int GetMailItem(lua_State* L, Player* player)
+    {
+        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+
+        Eluna::Push(L, player->GetMItem(guid.GetCounter()));
+        return 1;
+    }
+
+    /**
      * Returns an [Item] from the player by entry.
      *
      * The item can be equipped, in bags or in bank.
@@ -1400,6 +1414,7 @@ namespace LuaPlayer
     /**
      * Returns the database textID of the [WorldObject]'s gossip header text for the [Player]
      *
+     * @param WorldObject object
      * @return uint32 textId : key to npc_text database table
      */
     int GetGossipTextId(lua_State* L, Player* player)
@@ -1706,7 +1721,7 @@ namespace LuaPlayer
     {
         uint8 race = Eluna::CHECKVAL<uint8>(L, 2);
 
-#ifdef TRINITY
+#if defined TRINITY || AZEROTHCORE
         player->SetFactionForRace(race);
 #else
         player->setFactionForRace(race);
@@ -2267,10 +2282,8 @@ namespace LuaPlayer
     {
         Unit* unit = Eluna::CHECKOBJ<Unit>(L, 2);
 
-#ifdef TRINITY
+#if defined TRINITY || AZEROTHCORE
         AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit->GetFaction());
-#elif AZEROTHCORE
-        AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit->getFaction());
 #else
         AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit);
 #endif
@@ -2521,49 +2534,47 @@ namespace LuaPlayer
     }
 
     /**
-     * Repairs [Item] at specified position. Returns total repair cost 
+     * Repairs [Item] at specified position.
      *
      * @param uint16 position
      * @param bool cost = true
-     * @param float discountMod
-     * @param bool guildBank = false
-     * @return uint32 totalCost
+     * @param float discountMod = 1.0
      */
     int DurabilityRepair(lua_State* L, Player* player)
     {
         uint16 position = Eluna::CHECKVAL<uint16>(L, 2);
-        bool cost = Eluna::CHECKVAL<bool>(L, 3, true);
-        float discountMod = Eluna::CHECKVAL<float>(L, 4);
-        bool guildBank = Eluna::CHECKVAL<bool>(L, 5, false);
+        bool takeCost = Eluna::CHECKVAL<bool>(L, 3, true);
+        float discountMod = Eluna::CHECKVAL<float>(L, 4, 1.0f);
 
 #ifdef CLASSIC
-        Eluna::Push(L, player->DurabilityRepair(position, cost, discountMod));
+        player->DurabilityRepair(position, takeCost, discountMod);
+#elif defined(TRINITY)
+        player->DurabilityRepair(position, takeCost, discountMod);
 #else
-        Eluna::Push(L, player->DurabilityRepair(position, cost, discountMod, guildBank));
+        player->DurabilityRepair(position, takeCost, discountMod, false);
 #endif
-        return 1;
+        return 0;
     }
 
     /**
-     * Repairs all [Item]s. Returns total repair cost
+     * Repairs all [Item]s.
      *
-     * @param bool cost = true
-     * @param float discountMod = 1
+     * @param bool takeCost = true
+     * @param float discountMod = 1.0
      * @param bool guidBank = false
-     * @return uint32 totalCost
      */
     int DurabilityRepairAll(lua_State* L, Player* player)
     {
-        bool cost = Eluna::CHECKVAL<bool>(L, 2, true);
+        bool takeCost = Eluna::CHECKVAL<bool>(L, 2, true);
         float discountMod = Eluna::CHECKVAL<float>(L, 3, 1.0f);
         bool guildBank = Eluna::CHECKVAL<bool>(L, 4, false);
 
 #ifdef CLASSIC
-        Eluna::Push(L, player->DurabilityRepairAll(cost, discountMod));
+        player->DurabilityRepairAll(takeCost, discountMod);
 #else
-        Eluna::Push(L, player->DurabilityRepairAll(cost, discountMod, guildBank));
+        player->DurabilityRepairAll(takeCost, discountMod, guildBank);
 #endif
-        return 1;
+        return 0;
     }
 
     /**
@@ -3077,14 +3088,11 @@ namespace LuaPlayer
     {
         std::string text = Eluna::CHECKVAL<std::string>(L, 2);
         uint32 lang = Eluna::CHECKVAL<uint32>(L, 3);
-#ifdef TRINITY
+#if defined(TRINITY) || defined(AZEROTHCORE)
         Player* receiver = Eluna::CHECKOBJ<Player>(L, 4);
-#else
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 4);
-#endif
-#ifdef TRINITY
         player->Whisper(text, (Language)lang, receiver);
 #else
+        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 4);
         player->Whisper(text, lang, guid);
 #endif
         return 0;
@@ -3113,7 +3121,7 @@ namespace LuaPlayer
     {
         std::string text = Eluna::CHECKVAL<std::string>(L, 2);
         uint32 lang = Eluna::CHECKVAL<uint32>(L, 3);
-#ifdef TRINITY
+#if defined(TRINITY) || defined(AZEROTHCORE)
         player->Yell(text, (Language)lang);
 #else
         player->Yell(text, lang);
@@ -3131,7 +3139,7 @@ namespace LuaPlayer
     {
         std::string text = Eluna::CHECKVAL<std::string>(L, 2);
         uint32 lang = Eluna::CHECKVAL<uint32>(L, 3);
-#ifdef TRINITY
+#if defined(TRINITY) || defined(AZEROTHCORE)
         player->Say(text, (Language)lang);
 #else
         player->Say(text, lang);
@@ -3861,6 +3869,17 @@ namespace LuaPlayer
 #endif
         return 0;
     }
+
+#if !defined(CLASSIC)
+    /**
+     * Remove cooldowns on spells that have less than 10 minutes of cooldown from the [Player], similarly to when you enter an arena.
+     */
+    int RemoveArenaSpellCooldowns(lua_State* /*L*/, Player* player)
+    {
+        player->RemoveArenaSpellCooldowns();
+        return 0;
+    }
+#endif
 
     /**
      * Resurrects the [Player].
