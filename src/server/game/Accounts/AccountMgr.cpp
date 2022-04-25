@@ -49,7 +49,7 @@ namespace AccountMgr
         stmt->SetData(1, salt);
         stmt->SetData(2, verifier);
         stmt->SetData(3, uint8(sWorld->getIntConfig(CONFIG_EXPANSION)));
-
+        stmt->SetData(4, email);
         LoginDatabase.Execute(stmt);
 
         stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_REALM_CHARACTERS_INIT);
