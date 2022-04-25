@@ -14562,8 +14562,8 @@ void Player::_SaveCharacter(bool create, CharacterDatabaseTransaction trans)
         ss_copy << GetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET) << " ";
     }
 
-    stmt2->setUInt32(index++, GetGUID().GetCounter());
-    stmt2->setString(index++, ss_copy.str());
+    stmt2->SetData(index++, GetGUID().GetCounter());
+    stmt2->SetData(index++, ss_copy.str());
     trans->Append(stmt2);
 }
 

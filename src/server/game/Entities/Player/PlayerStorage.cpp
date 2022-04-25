@@ -75,13 +75,14 @@
 #include "WorldPacket.h"
 #include "Tokenize.h"
 #include "StringConvert.h"
-
+#include <boost/typeof/typeof.hpp>
+#include <boost/tokenizer.hpp>
 // TODO: this import is not necessary for compilation and marked as unused by the IDE
 //  however, for some reasons removing it would cause a damn linking issue
 //  there is probably some underlying problem with imports which should properly addressed
 //  see: https://github.com/azerothcore/azerothcore-wotlk/issues/9766
 #include "GridNotifiersImpl.h"
-
+using namespace  boost;
 /*********************************************************/
 /***                    STORAGE SYSTEM                 ***/
 /*********************************************************/
@@ -5643,29 +5644,38 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
     }
 
     // pzx 最后加载幻化 幻化自定义内容  读取数据库记录
-    QueryResult result_huanh = CharacterDatabase.PQuery("select huanhua from _character_hh where guid='%u'", GetGUID().GetCounter());
+    QueryResult result_huanh = CharacterDatabase.Query("select huanhua from _character_hh where guid='%u'", GetGUID().GetCounter());
     if (!result_huanh)
     {
-        sLog->outString(">> Loaded 0 huanhua for %u", GetGUID().GetCounter());
+        //sLog->outString(">> Loaded 0 huanhua for %u", GetGUID().GetCounter());
         return true;
     }
 
     do
     {
         Field*      fields  = result_huanh->Fetch();
-        std::string huanhua = fields[0].GetString();
+        std::string huanhua = fields[0].Get<std::string>();
 
-        Tokenizer tokens(huanhua, ' ');
+        tokenizer<> tok(huanhua);
         int       i = 0;
-        for (Tokenizer::const_iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
+        for (BOOST_AUTO(it, tok.begin()); it != tok.end(); ++it)
         {
-            uint32 node = uint32(atol(*iter));
+            uint32 node = uint32(atol((*it).c_str()));
             if (node > 0)
             {
                 SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET, node);
             }
             i++;
         }
+        //for (tokenizer::const_iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
+        //{
+        //    uint32 node = uint32(atol(*iter));
+        //    if (node > 0)
+        //    {
+        //        SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET, node);
+        //    }
+        //    i++;
+        //}
 
     } while (result_huanh->NextRow());
 
