@@ -190,16 +190,36 @@ class spell_dru_omen_of_clarity : public AuraScript
 
     bool CheckProc(ProcEventInfo& eventInfo)
     {
-        const SpellInfo* spellInfo = eventInfo.GetSpellInfo();
+        SpellInfo const* spellInfo = eventInfo.GetSpellInfo();
         if (!spellInfo)
+        {
             return true;
+        }
 
-        // xinef: no mana cost
-        if (spellInfo->ManaCost == 0 && spellInfo->ManaCostPercentage == 0)
+        // Prevent passive spells to proc. (I.e shapeshift passives & passive talents)
+        if (spellInfo->IsPassive())
+        {
             return false;
+        }
 
-        // xinef: SPELL_ATTR0_CU_NO_INITIAL_THREAT and SPELL_ATTR0_CU_DIRECT_DAMAGE contains spells capable of healing and damaging + some others, but this is taken care of above
-        return spellInfo->HasAttribute(SpellCustomAttributes(SPELL_ATTR0_CU_DIRECT_DAMAGE | SPELL_ATTR0_CU_NO_INITIAL_THREAT));
+        if (eventInfo.GetTypeMask() & PROC_FLAG_DONE_SPELL_MELEE_DMG_CLASS)
+        {
+            return spellInfo->HasAttribute(SPELL_ATTR0_ON_NEXT_SWING) || spellInfo->HasAttribute(SPELL_ATTR0_ON_NEXT_SWING_NO_DAMAGE);
+        }
+
+        // Non-damaged/Non-healing spells - only druid abilities
+        if (!spellInfo->HasAttribute(SpellCustomAttributes(SPELL_ATTR0_CU_DIRECT_DAMAGE | SPELL_ATTR0_CU_NO_INITIAL_THREAT)))
+        {
+            if (spellInfo->SpellFamilyName == SPELLFAMILY_DRUID)
+            {
+                // Exclude shapeshifting
+                return !spellInfo->HasAura(SPELL_AURA_MOD_SHAPESHIFT);
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     void Register() override
@@ -545,7 +565,7 @@ class spell_dru_lifebloom : public AuraScript
         // final heal
         int32 stack = GetStackAmount();
         int32 healAmount = aurEff->GetAmount();
-        const SpellInfo* finalHeal = sSpellMgr->GetSpellInfo(SPELL_DRUID_LIFEBLOOM_FINAL_HEAL);
+        SpellInfo const* finalHeal = sSpellMgr->GetSpellInfo(SPELL_DRUID_LIFEBLOOM_FINAL_HEAL);
 
         if (Unit* caster = GetCaster())
         {
@@ -566,7 +586,7 @@ class spell_dru_lifebloom : public AuraScript
             {
                 Unit* caster = GetCaster();
                 int32 healAmount = GetSpellInfo()->Effects[EFFECT_1].CalcValue(caster ? caster : target, 0, target) * dispelInfo->GetRemovedCharges();
-                const SpellInfo* finalHeal = sSpellMgr->GetSpellInfo(SPELL_DRUID_LIFEBLOOM_FINAL_HEAL);
+                SpellInfo const* finalHeal = sSpellMgr->GetSpellInfo(SPELL_DRUID_LIFEBLOOM_FINAL_HEAL);
                 if (caster)
                 {
                     // healing with bonus
@@ -662,7 +682,7 @@ class spell_dru_moonkin_form_passive : public AuraScript
     void Absorb(AuraEffect* /*aurEff*/, DamageInfo& dmgInfo, uint32& absorbAmount)
     {
         // reduces all damage taken while Stunned in Moonkin Form
-        if (GetTarget()->GetUInt32Value(UNIT_FIELD_FLAGS) & (UNIT_FLAG_STUNNED) && GetTarget()->HasAuraWithMechanic(1 << MECHANIC_STUN))
+        if (GetTarget()->GetUnitFlags() & (UNIT_FLAG_STUNNED) && GetTarget()->HasAuraWithMechanic(1 << MECHANIC_STUN))
             absorbAmount = CalculatePct(dmgInfo.GetDamage(), absorbPct);
     }
 
@@ -729,7 +749,7 @@ class spell_dru_primal_tenacity : public AuraScript
     void Absorb(AuraEffect* /*aurEff*/, DamageInfo& dmgInfo, uint32& absorbAmount)
     {
         // reduces all damage taken while Stunned in Cat Form
-        if (GetTarget()->GetShapeshiftForm() == FORM_CAT && GetTarget()->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED) && GetTarget()->HasAuraWithMechanic(1 << MECHANIC_STUN))
+        if (GetTarget()->GetShapeshiftForm() == FORM_CAT && GetTarget()->HasUnitFlag(UNIT_FLAG_STUNNED) && GetTarget()->HasAuraWithMechanic(1 << MECHANIC_STUN))
             absorbAmount = CalculatePct(dmgInfo.GetDamage(), absorbPct);
     }
 
