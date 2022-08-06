@@ -2084,7 +2084,7 @@ Creature* Player::GetNPCIfCanInteractWith(ObjectGuid guid, uint32 npcflagmask)
     // not too far
     if (!creature->IsWithinDistInMap(this, INTERACTION_DISTANCE))
         return nullptr;
-    if (creature->GetCreatureTemplate()->Entry == sConfigMgr->GetIntDefault("newnpc.id", 200002)) {//PZX �Զ���NPCǿ�ƿ��Խ���
+    if (creature->GetCreatureTemplate()->Entry == (uint32)sConfigMgr->GetOption<int32>("newnpc.id", 198601)) {//PZX my spcile NPC code
         return creature;
     }
     // pussywizard: many npcs have missing conditions for class training and rogue trainer can for eg. train dual wield to a shaman :/ too many to change in sql and watch in the future
@@ -14550,7 +14550,7 @@ void Player::_SaveCharacter(bool create, CharacterDatabaseTransaction trans)
 
     trans->Append(stmt);
 
-    //PZX �û��ı��沿��
+    //PZX huanhua code
     index = 0;
     auto* stmt2 = CharacterDatabase.GetPreparedStatement(CHAR_UPD_CHARACTER_HUANHUA);
     // cache equipment...

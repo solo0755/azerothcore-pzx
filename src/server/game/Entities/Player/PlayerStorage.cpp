@@ -5655,9 +5655,8 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
     {
         Field*      fields  = result_huanh->Fetch();
         std::string huanhua = fields[0].Get<std::string>();
-
         tokenizer<> tok(huanhua);
-        int       i = 0;
+        int   i = 0;
         for (BOOST_AUTO(it, tok.begin()); it != tok.end(); ++it)
         {
             uint32 node = uint32(atol((*it).c_str()));
@@ -5667,15 +5666,6 @@ bool Player::LoadFromDB(ObjectGuid playerGuid, CharacterDatabaseQueryHolder cons
             }
             i++;
         }
-        //for (tokenizer::const_iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
-        //{
-        //    uint32 node = uint32(atol(*iter));
-        //    if (node > 0)
-        //    {
-        //        SetUInt32Value(PLAYER_VISIBLE_ITEM_1_ENTRYID + i * MAX_VISIBLE_ITEM_OFFSET, node);
-        //    }
-        //    i++;
-        //}
 
     } while (result_huanh->NextRow());
 

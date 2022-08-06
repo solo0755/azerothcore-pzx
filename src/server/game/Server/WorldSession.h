@@ -415,7 +415,10 @@ public:
 
     void SendTrainerList(ObjectGuid guid);
     void SendTrainerList(ObjectGuid guid, std::string const& strTitle);
+
     void SendTrainerList(uint64 guid, uint32 npcid);//PZX 自定义训练师
+    void SendListInventory2(ObjectGuid vendorGuid, uint32 vendorEntry, std::string const& itemStrings);//PZX 自定义物品菜单
+
     void SendListInventory(ObjectGuid guid, uint32 vendorEntry = 0);
     void SendShowBank(ObjectGuid guid);
     bool CanOpenMailBox(ObjectGuid guid);

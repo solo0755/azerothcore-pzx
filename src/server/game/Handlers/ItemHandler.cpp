@@ -30,6 +30,7 @@
 #include "WorldSession.h"
 #include "Config.h"
 
+
 void WorldSession::HandleSplitItemOpcode(WorldPacket& recvData)
 {
     //LOG_DEBUG("network.opcode", "WORLD: CMSG_SPLIT_ITEM");
@@ -1683,4 +1684,126 @@ bool WorldSession::recoveryItem(Item* pItem)
     }
 
     return false;
+}
+
+void WorldSession::SendListInventory2(ObjectGuid vendorGuid, uint32 vendorEntry, std::string const& itemStrings)//PZX 自定义物品ID菜单
+{
+    LOG_DEBUG("network", "WORLD: Sent SMSG_LIST_INVENTORY");
+
+    Creature* vendor = GetPlayer()->GetNPCIfCanInteractWith(vendorGuid, UNIT_NPC_FLAG_VENDOR);
+    if (!vendor)
+    {
+        LOG_DEBUG("network", "WORLD: SendListInventory - Unit ({}) not found or you can not interact with him.", vendorGuid.ToString());
+        _player->SendSellError(SELL_ERR_CANT_FIND_VENDOR, nullptr, ObjectGuid::Empty, 0);
+        return;
+    }
+
+    // remove fake death
+    if (GetPlayer()->HasUnitState(UNIT_STATE_DIED))
+    {
+        GetPlayer()->RemoveAurasByType(SPELL_AURA_FEIGN_DEATH);
+    }
+
+    // Stop the npc if moving
+    if (uint32 pause = vendor->GetMovementTemplate().GetInteractionPauseTimer())
+        vendor->PauseMovement(pause);
+    vendor->SetHomePosition(vendor->GetPosition());
+
+    SetCurrentVendor(vendorEntry);
+
+    //先计算出物品字符串数量
+    tokenizer<> tok(itemStrings);
+    int  itemCount = 0;
+    std::vector<uint32> pzxMenuVendorItemList;
+    for (BOOST_AUTO(it, tok.begin()); it != tok.end(); ++it)
+    {
+        uint32 node = uint32(atol((*it).c_str()));
+        if (node > 0)
+        {
+            pzxMenuVendorItemList.push_back(node);
+            itemCount++;
+        }
+    }
+
+    //VendorItemData const* items = vendorEntry ? sObjectMgr->GetNpcVendorItemList(vendorEntry) : vendor->GetVendorItems();
+    if (!itemCount)
+    {
+        WorldPacket data(SMSG_LIST_INVENTORY, 8 + 1 + 1);
+        data << vendorGuid;
+        data << uint8(0);                                   // count == 0, next will be error code
+        data << uint8(0);                                   // "Vendor has no inventory"
+        SendPacket(&data);
+        return;
+    }
+
+    uint8 count = 0;
+
+    WorldPacket data(SMSG_LIST_INVENTORY, 8 + 1 + itemCount * 8 * 4);
+    data << vendorGuid;
+
+    size_t countPos = data.wpos();
+    data << uint8(count);
+
+    float discountMod = _player->GetReputationPriceDiscount(vendor);
+
+    for (uint8 slot = 0; slot < itemCount; ++slot)
+    {
+        //if (VendorItem const* item = items->GetItem(slot))
+            if (ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(pzxMenuVendorItemList[slot]))
+            {
+                if (!(itemTemplate->AllowableClass & _player->getClassMask()) && itemTemplate->Bonding == BIND_WHEN_PICKED_UP && !_player->IsGameMaster())
+                {
+                    continue;
+                }
+                // Only display items in vendor lists for the team the
+                // player is on. If GM on, display all items.
+                if (!_player->IsGameMaster() && ((itemTemplate->Flags2 & ITEM_FLAGS_EXTRA_HORDE_ONLY && _player->GetTeamId() == TEAM_ALLIANCE) || (itemTemplate->Flags2 & ITEM_FLAGS_EXTRA_ALLIANCE_ONLY && _player->GetTeamId() == TEAM_HORDE)))
+                {
+                    continue;
+                }
+
+                // Items sold out are not displayed in list
+                uint32 leftInStock= 0xFFFFFFFF;
+                //uint32 leftInStock = !item->maxcount ? 0xFFFFFFFF : vendor->GetVendorItemCurrentCount(item);
+                if (!_player->IsGameMaster() && !leftInStock)
+                {
+                    continue;
+                }
+
+                ConditionList conditions = sConditionMgr->GetConditionsForNpcVendorEvent(vendor->GetEntry(), pzxMenuVendorItemList[slot]);
+                if (!sConditionMgr->IsObjectMeetToConditions(_player, vendor, conditions))
+                {
+                    LOG_DEBUG("network", "SendListInventory: conditions not met for creature entry {} item {}", vendor->GetEntry(), pzxMenuVendorItemList[slot]);
+                    continue;
+                }
+
+                // reputation discount
+                //int32 price = item->IsGoldRequired(itemTemplate) ? uint32(floor(itemTemplate->BuyPrice * discountMod)) : 0;
+                int32 price = itemTemplate->Flags2& ITEM_FLAGS_EXTRA_EXT_COST_REQUIRES_GOLD ? 0: uint32(floor(itemTemplate->BuyPrice * discountMod));
+                data << uint32(slot + 1);       // client expects counting to start at 1
+                data << uint32(pzxMenuVendorItemList[slot]);
+                data << uint32(itemTemplate->DisplayInfoID);
+                data << int32(leftInStock);
+                data << uint32(price);
+                data << uint32(itemTemplate->MaxDurability);
+                data << uint32(itemTemplate->BuyCount);
+                //data << uint32(item->ExtendedCost);
+                data << uint32(0);
+
+                if (++count >= MAX_VENDOR_ITEMS)
+                {
+                    break;
+                }
+            }
+    }
+
+    if (count == 0)
+    {
+        data << uint8(0);
+        SendPacket(&data);
+        return;
+    }
+
+    data.put<uint8>(countPos, count);
+    SendPacket(&data);
 }

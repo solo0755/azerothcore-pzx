@@ -217,7 +217,7 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket& recvData)
     recvData >> guid >> spellId;
     LOG_DEBUG("network", "WORLD: Received CMSG_TRAINER_BUY_SPELL Npc {}, learn spell id is: {}", guid.ToString(), spellId);
 
-    Creature* unit = GetPlayer()->GetNPCIfCanInteractWith(guid, UNIT_NPC_FLAG_TRAINER);
+    Creature* unit = GetPlayer()->GetNPCIfCanInteractWith(guid, UNIT_NPC_FLAG_TRAINER);//PZX 自定义响应NPC 菜单或者技能
     if (!unit)
     {
         LOG_DEBUG("network", "WORLD: HandleTrainerBuySpellOpcode - Unit (%s) not found or you can not interact with him.", guid.ToString().c_str());
@@ -974,7 +974,7 @@ void WorldSession::HandleRepairItemOpcode(WorldPacket& recvData)
     }
 }
 
-void WorldSession::SendTrainerList(uint64 guid, uint32 npcid)
+void WorldSession::SendTrainerList(uint64 guid, uint32 npcid)//PZX 自定义训练师ID方法
 {
     GetPlayer()->SetTrainerEntry(npcid);
     // remove fake death
