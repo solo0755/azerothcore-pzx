@@ -8982,6 +8982,12 @@ void ObjectMgr::LoadGossipMenuItems()
     LOG_INFO("server.loading", " ");
 }
 
+void ObjectMgr::RemoveVendorItemCustome(uint32 entry)
+{
+    VendorItemData& vList = _cacheVendorItemStore[entry];
+    vList.Clear();
+}
+
 void ObjectMgr::AddVendorItem(uint32 entry, uint32 item, int32 maxcount, uint32 incrtime, uint32 extendedCost, bool persist /*= true*/)
 {
     VendorItemData& vList = _cacheVendorItemStore[entry];

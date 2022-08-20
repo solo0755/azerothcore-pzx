@@ -1722,17 +1722,20 @@ void WorldSession::SendListInventory2(ObjectGuid vendorGuid, uint32 vendorEntry,
     tokenizer<> tok(itemStrings);
     int  itemCount = 0;
     std::vector<uint32> pzxMenuVendorItemList;
+    sObjectMgr->RemoveVendorItemCustome(vendorEntry);
     for (BOOST_AUTO(it, tok.begin()); it != tok.end(); ++it)
     {
         uint32 node = uint32(atol((*it).c_str()));
         if (node > 0)
         {
             pzxMenuVendorItemList.push_back(node);
+            sObjectMgr->AddVendorItem(vendorEntry, node, 0, 0, 0,false);
             itemCount++;
         }
     }
-
-    //VendorItemData const* items = vendorEntry ? sObjectMgr->GetNpcVendorItemList(vendorEntry) : vendor->GetVendorItems();
+    //TODO 构建一个对象
+    
+   // VendorItemData const* items = vendorEntry ? sObjectMgr->GetNpcVendorItemList(vendorEntry) : vendor->GetVendorItems();
     if (!itemCount)
     {
         WorldPacket data(SMSG_LIST_INVENTORY, 8 + 1 + 1);
