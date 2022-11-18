@@ -1269,7 +1269,7 @@ void Map::RemoveAllPlayers()
             {
                 // this is happening for bg
                 LOG_ERROR("maps", "Map::UnloadAll: player {} is still in map {} during unload, this should not happen!", player->GetName(), GetId());
-                player->TeleportTo(player->m_homebindMapId, player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->GetOrientation());
+                player->TeleportTo(player->m_homebindMapId, player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->m_homebindO);
             }
         }
     }
@@ -1946,11 +1946,11 @@ inline LiquidData const GridMap::GetLiquidData(float x, float y, float z, float 
             {
                 // Get water level
                 float liquid_level = _liquidMap ? _liquidMap[lx_int * _liquidWidth + ly_int] : _liquidLevel;
-                // Get ground level (sub 0.2 for fix some errors)
+                // Get ground level
                 float ground_level = getHeight(x, y);
 
-                // Check water level and ground level
-                if (liquid_level >= ground_level && z >= ground_level)
+                // Check water level and ground level (sub 0.2 for fix some errors)
+                if (liquid_level >= ground_level && z >= ground_level - 0.2f)
                 {
                     // All ok in water -> store data
                     liquidData.Entry  = entry;
